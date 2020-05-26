@@ -1,0 +1,139 @@
+<?php
+$cupon = $this->_data['categoria'][0];
+
+?>
+
+
+<style>
+    .white-box {
+        background:white;
+        padding:20px;
+        margin-bottom:10px;
+    }
+</style>
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title ">
+                Editar Cupón
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+    <form id="frmNewNew" class="form-vertical form-bordered ajaxform" action="<?= ADMIN_URL.$this->_controlador ?>/action_edit" method="POST" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    Datos de sesión
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="control-group">
+                                    <label for="username" class="control-label">#ID</label>
+                                    <div class="controls">
+                                        <input type="text" id="id" class="form-control" name="d[id]" value="<?php echo @$cupon['id']?>"  disabled/>
+                                        <input type="hidden" id="id" class="form-control" name="d[id]" value="<?php echo @$cupon['id']?>"  />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group m-form__group">
+                                    <label for="exampleInputEmail1">Enlace permanente</label>
+                                    <div class="input-group m-input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><?php echo MENU_URL?>blog/?c=</span></div>
+                                        <input type="text" class="form-control m-input" name="d[slug]" value="<?php echo @$cupon['slug']?>" aria-describedby="basic-addon1">
+                                    </div>
+                                    <span class="m-form__help">URL amigable para la categoría</span>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <?php
+                foreach(Languages::getLangsDB() as $k => $v) {
+                    ?>
+                    <div class="m-portlet">
+
+                        <div class="m-portlet__head">
+
+                            <div class="m-portlet__head-caption">
+                                <div class="m-portlet__head-title">
+                                    <h3 class="m-portlet__head-text">
+                                        Datos <?php echo $v['name'].' - '.$v['tagname']; ?>
+                                    </h3>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="m-portlet__body">
+
+
+
+                            <div class="tab-content">
+
+                                <?php
+
+                                $langid =  strtoupper($v['tagname']);
+                                $langidl =  strtolower($v['tagname']);
+
+                                echo '<div class="control-group mt10">
+                                        <label for="titulo" class="control-label">Título</label>
+                                        <div class="controls">
+                                            <input id="nombre" type="text" class="form-control" name="d['.$langidl.'][nombre]" value="'.@$cupon['langs'][$langidl]['nombre'].'" required />
+                                            
+                                        </div>
+                                    </div>
+';
+                                ?>
+
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+
+            <div class="col-lg-3" id="">
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    Acciones
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body">
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="<?= ADMIN_URL.$this->_controlador ?>/lista" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</form>
+
+

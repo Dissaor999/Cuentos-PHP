@@ -1,0 +1,21 @@
+<h3>Categorías</h3>
+<div class="brb"></div>
+<div class="text-left">
+    <ul class="categories-list">
+        <?php
+        if (isset($categorias) && sizeof($categorias) > 0)
+            foreach ($categorias as $categoria)
+                echo '<li><a href="' . BASE_URL . $this->_lang . DS . 'blog' . DS . '?c=' . $categoria['slug'] . '" class="'.((@$this->_data['_category'] == $categoria['slug']) ? 'active':'').'">' . $categoria['nombre'] . '</a></li>';
+        else echo '<li>No hay categorías para mostrar</li>';
+        ?>
+    </ul>
+
+</div>
+
+<style>
+    .categories-list{text-align:left; margin-top:10px;}
+    .categories-list li{display:block; margin-right: 10px; margin-bottom:10px; }
+    .categories-list a {transition:all .3s ease-in-out; display:block; padding:5px 25px; border:1px solid #29abe2; border-radius:15px;  }
+    .categories-list a:hover {background: #29abe2; color:white;  }
+    .categories-list a.active {background: #29abe2; color:white;  }
+</style>

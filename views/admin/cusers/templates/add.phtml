@@ -1,0 +1,298 @@
+<?php
+//THE PRODUCT
+
+
+
+/*
+echo '<pre>';
+    print_r($product);
+echo '</pre>';
+*/
+/*
+echo '<pre>';
+    print_r($filters);
+echo '</pre>';
+*/
+
+/*
+echo "<xmp>";
+    print_r(get_defined_vars());
+echo "</xmp>";
+*/
+
+
+
+$errors = @$this->_errors;
+
+if(sizeof(@$errors)>0) {
+    echo '<div class="alert alert-danger"><ul>';
+    foreach($errors as $error) {
+        echo '<li>'.$error.'</li>';
+    }
+    echo '</ul></div>';
+}
+
+if(@$this->_updated>0) {
+    echo '<div class="alert alert-success"><p>Se ha actualizado exitosamente.</p></div>';
+}
+else if (@$this->_updated==-1) {
+    echo '<div class="alert alert-warning"><p>No se ha podido actualizar.</p></div>';
+}
+?>
+
+<style>
+    .white-box {
+        background:white;
+        padding:20px;
+        margin-bottom:10px;
+    }
+</style>
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title ">
+                Añadir Usuario
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+
+
+        <?php
+        //  print_r($product);
+        ?>
+        <form id="frmNewNew" class="form-vertical form-bordered" action="<?= ADMIN_URL.$this->_controlador ?>/action_add" method="POST" enctype="multipart/form-data">
+
+            <div class="row">
+
+                <div class="col-lg-9">
+
+                    <div class="white-box">
+                        <div class="box-title">
+                            <h3>Datos de usuario</h3>
+                        </div>
+                        <div class="box-content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="control-group">
+                                        <label for="username" class="control-label">Nombre de usuario</label>
+                                        <div class="controls">
+                                            <input type="text" id="username" class="form-control" name="d[username]" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="control-group">
+                                        <label for="password" class="control-label">Contraseña</label>
+                                        <div class="controls">
+                                            <input type="password" id="password" class="form-control" name="d[password]" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="control-group">
+                                        <label for="repassword" class="control-label">Repite Contraseña</label>
+                                        <div class="controls">
+                                            <input type="password" id="repassword" class="form-control" name="d[repassword]" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="white-box">
+                        <div class="box-title">
+                            <h3>Datos de usuario</h3>
+                        </div>
+                        <div class="box-content">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="control-group">
+                                        <label for="username" class="control-label">Nombre</label>
+                                        <div class="controls">
+                                            <input type="text" id="username" class="form-control" name="d[first_name]" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="control-group">
+                                        <label for="username" class="control-label">Apellidos</label>
+                                        <div class="controls">
+                                            <input type="text" id="username" class="form-control" name="d[last_name]" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="control-group">
+                                        <label for="email" class="control-label">E-mail</label>
+                                        <div class="controls">
+                                            <input type="email" id="email" class="form-control" name="d[email]" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="control-group">
+                                        <label for="phone" class="control-label">Teléfono Fijo</label>
+                                        <div class="controls">
+                                            <input type="text" id="phone" class="form-control" name="d[phone]" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="control-group">
+                                        <label for="mobile" class="control-label">Teléfono Móvil</label>
+                                        <div class="controls">
+                                            <input type="text" id="mobile" class="form-control" name="d[mobile]" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="control-group">
+                                        <label for="phone" class="control-label">Sexo</label>
+                                        <div class="controls">
+                                            <select class="form-control" name="d[gender]">
+                                                <option value="male" >Hombre</option>
+                                                <option value="female">Mujer</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="control-group">
+                                        <label for="address" class="control-label">Dirección</label>
+                                        <div class="controls">
+                                            <input type="text" id="address" class="form-control" name="d[address]" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="control-group">
+                                        <label for="address_bill" class="control-label">Dirección FACTURACIÓN</label>
+                                        <div class="controls">
+                                            <input type="text" id="address_bill" class="form-control" name="d[address_bill]" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="control-group">
+                                        <label for="address" class="control-label">Idioma principal</label>
+                                        <div class="controls">
+
+                                            <select class="form-control" name="d[user_lang]">
+                                                <?php
+                                                foreach(Languages::getLangsDB() as $lang) echo '<option value="'.$lang['tagname'].'" >'.$lang['name'].'</option>';
+                                                ?>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="col-lg-3" id="">
+                    <div class="white-box">
+                        <div class="box-title"><h3>Datos de la publicación</h3></div>
+                        <div class="box-content">
+
+
+
+
+
+
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <a href="<?= ADMIN_URL.$this->_controlador ?>/lista" class="btn btn-danger">Cancelar</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="white-box">
+                        <div class="box-title">
+                            <h3>Estado del usuario</h3>
+                        </div>
+                        <div class="box-content">
+                            <div class="row">
+
+                                <div class="col-sm-4">
+                                    <div class="control-group">
+                                        <label for="active" class="control-label">Activo</label>
+                                        <div class="controls">
+                                            <input type="checkbox" id="active" class="js-switch" data-color="#13dafe" name="d[active]" checked />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="control-group">
+                                        <label for="banned" class="control-label">Banned</label>
+                                        <div class="controls">
+                                            <input type="checkbox" class="js-switch" data-color="#13dafe" id="banned"  name="d[banned]" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="control-group">
+                                        <label for="newsletter" class="control-label">Newsletter</label>
+                                        <div class="controls">
+                                            <input type="checkbox" id="newsletter" class="js-switch" data-color="#13dafe" name="d[newsletter]" checked />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+
+                    
+                </div>
+
+            </div>
+
+    </div>
+</div>
+</form>
+
+

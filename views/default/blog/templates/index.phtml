@@ -1,0 +1,178 @@
+<?php
+$lastNew = $this->_data['lastNew']['data'];
+$categorias = $this->_data['categoriasBlog']['data'];
+?>
+<div class="page-heading" >
+    <div class="overlay"></div>
+    <div class=" text-center">
+        <h1 class="title-heading" style="color:white">Blog</h1>
+        <br/>
+        <div class="container"><?php  include('parts/buscar-inline.phtml');?></div>
+    </div>
+</div>
+
+<style>
+
+    /*ANIMATE BLOG POSTS*/
+    .blog-image {
+        overflow:hidden;
+    }
+    .blog-image:after {
+        z-index:9;
+        position:absolute;
+        top:0;
+        right:0;
+        left:0;
+        bottom:0;
+        content: ' ';
+        display:block;
+        background: #0a7ae2;
+        opacity:0;
+        transition: all .3s ease-out;
+    }
+    .noticia_lista:hover .blog-image:after{
+        opacity:0.3;
+    }
+
+    .noticia_lista{
+        border: 1px solid #ddd;
+        border-radius:16px;
+
+        transition: all .3s ease-out;
+    }
+    .noticia_lista:hover {
+        border-color:#0a7ae2;
+    }
+    .noticia_lista .post_info {
+        padding: 10px 20px;
+    }
+    .noticia_lista .date {border: 1px solid #d0d0d0; border-radius:35px; padding: 2px 8px; display:inline-block; vertical-align:middle; line-height:16px; font-size:12px; color:#ccc;}
+</style>
+
+<div class="blog-container" style="">
+    <div class="container">
+        <div class="row" id="categories-inline">
+            <div class="col-md-12">
+                <?php
+                    include('parts/categories_inline.phtml');
+                ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <?php
+
+
+                $i = 0;
+                if (sizeof($lastNew) > 0)
+                    foreach ($lastNew as $zz => $new) {
+
+                        if ($i == 0) {
+                            echo '<div class="row">';
+                        }
+                        $categorias_html = '';
+                        if (isset($new['categoriasBlog'])) {
+                            $categorias_html = '';
+                            foreach ($new['categoriasBlog'] as $categoria) $categorias_html .= '<a class="btag" href="' . BASE_URL . $this->_lang . DS . 'blog' . DS . '?c=' . $categoria['slug'] . '">' . $categoria['nombre'] . '</a>';
+                        }
+                        ?>
+                        <div class="col-md-4 col-xs-12 col-sm-12  text-center" date="<?= $new['fecha'] ?>">
+                            <div class="noticia_lista">
+                              <a href="<?= BASE_URL . $this->_lang . DS . 'blog' . DS . 'ver' . DS . $new['slug'] ?>"> <div class="blog-image">
+                                    <img src="<?= $_layoutParams['public_img'] . 'blog' . DS . 'thumbs' . DS . $new['img_thumb'] ?>" />
+                               </div></a>
+                                <div class="post_info">
+                                    <h5 class="h4">
+                                        <span class="blog-title">
+                                            <a href="<?= BASE_URL . $this->_lang . DS . 'blog' . DS . 'ver' . DS . $new['slug'] ?>" class="hover-effect-2lines"><?= $new['titulo'] ?><span  class="hover-line"></span></a>
+                                        </span>
+                                    </h5>
+
+
+
+                                    <article class="normal blog grei-919191">
+                                        <p><?= html_entity_decode($new['descripcion_corta']) ?></p>
+
+                                    </article>
+
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="date text-center">
+                                                <div class="day"><?= date('d', $new['fecha']) ?> / <?= date('m', $new['fecha']) ?> / <?= date('Y', $new['fecha']) ?></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 text-center">
+                                            <a href="<?= BASE_URL . $this->_lang . DS . 'blog' . DS . 'ver' . DS . $new['slug'] ?>" class="btn btn-xs btn-outline-blue" style="font-size:10px;
+    padding: 4px 12px !important;margin:0px;">VER MÁS</a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php
+                        $i++;
+                        if ($i == 3 || ((($zz) + 1) == sizeof($lastNew))) {
+                            $i = 0;
+                            echo '</div>';
+                        }
+                    }
+                else {
+                    ?>
+
+                    <div class="text-center"  style="margin:30px 0;">
+                        <img src="<?=$_layoutParams['public_img']?>slider/slider-1/capas/LIBRO.png" style="display:inline-block; margin-right: 30px;  width: 200px;" />
+                        <h1 style="display:inline-block;"> No hay entradas para  mostrar</h1>
+                        <div class="row" style="margin:30px 0;">
+                            <div class="button-wrap">
+                                <div class="offset-55 md-offset-25"></div>
+                                <a href="<?= BASE_URL . $this->_lang . '/blog/' ?>"
+                                   class="button big-button animated-button activated nodelay">
+                                    <span class="btn btn-orange-outline">Ver todos los post</span>
+                                    <span class="top"></span>
+                                    <span class="right"></span>
+                                    <span class="bottom"></span>
+                                    <span class="left"></span>
+                                </a>
+                                <div class="offset-155 md-offset-80"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+                <div class="pagination-pages">
+                    <?php
+                    $res = $this->_data['_results'];
+                    $limitP = $this->_data['_limitPosts'];
+                    $paginas = ceil($res / $limitP);
+                    for ($it = 1; $it <= $paginas; $it++) {
+                        echo '<a href="' . BASE_URL . $this->_lang . '/blog/?p=' . ($it) . '" class="pagination-page ' . (($it == $this->_data['_actualPage']) ? 'active' : '') . '" >' . ($it) . '</a>';
+                    }
+                    ?>
+                </div>
+            </div>
+    </div>
+
+</div>
+</div>
+
+<style>
+    .blog-title {font-size:26px;}
+    #categories-inline {margin: 30px 0;}
+    .noticia_lista {
+        overflow:hidden;
+    }
+    .pagination-pages {
+        margin-top:70px;
+        padding-top:30px;
+        border-top: 1px solid rgba(10,122, 226,.4);
+        text-align: center;
+    }
+    .pagination-page {transiton: all .3s ease-in-out; display:inline-block; color:#0a7ae2; padding:4px; border: 1px solid #0a7ae2; border-radius:100%; height:30px; width:30px; }
+    .pagination-page:hover {background: #0a7ae2; color:white; }
+</style>

@@ -1,0 +1,62 @@
+<div class="book-heading"
+     style="padding: 70px 0 160px; background-image: url(<?php echo $_layoutParams['public_img'] ?>bookbg.jpg);background-position: center; background-size: cover; background-repeat: no-repeat;">
+    <div class="overlay"></div>
+    <div class=" text-center">
+        <h1 class="title-heading" style="color:white">Personaliza tu cuento</h1>
+    </div>
+
+</div>
+<style>
+    .libro-list {
+        margin-bottom:85px;
+    }
+</style>
+<div style="padding:50px 0 100px;">
+<div id="elige-aventura-home" class="section-home">
+    <div class="title text-center">
+        <h1>Elige tu aventura</h1>
+    </div>
+    <br />
+    <br />
+    <div class=" container">
+            <?php
+            foreach($this->books_list as $book) { ?>
+        <div class="row libro-list">
+
+
+        <div class="col-sm-6 book-img">
+                        <img src="<?php echo $_layoutParams['public_img'] ?>books/<?php echo $book['slug'] ?>/<?php echo $book['main_image'] ?>">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <h3>  <?php echo $book['name'] ?> </h3>
+                        <div style="margin:10px 0;"><img src="<?= $_layoutParams['public_img'] ?>nosotros/trazo-nos.png" style="width:300px;"/></div>
+
+                        <p> <?php echo $book['description'] ?> </p>
+
+                        <div class="  text-left " style="font-size:15px; margin-bottom: 26px;">
+                           <img src="<?php echo $_layoutParams['public_img'] ?>star-flat.png" style="vertical-align:bottom; display:inline-block; height:24px"/>
+                            Valores: <?php echo $book['valores'] ?>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a href="#" class="button-outline-blue"><img src="<?php echo $_layoutParams['template_img'] ?>age_icon.png" style="    vertical-align: sub;
+        height: 24px;
+        width: inherit;
+        display: inline-block;"/> <?php echo $book['rango_edad'] ?> </a>
+                            </div>
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <a href="<?php echo MENU_URL ?>libros/ver/<?php echo $book['slug'] ?>/?<?php if(isset($_GET['gender']) && $_GET['gender']) echo 'gender='.$_GET['gender'] ?><?php if(isset($_GET['name']) && $_GET['name']) echo '&name='.$_GET['name'] ?>" class="text-center button-orange">Ver</a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <?php
+            } ?>
+
+    </div>
+</div>
+
+</div>

@@ -1,0 +1,31 @@
+<div class="page-heading text-center">
+    <h1>Pago por Transferencia</h1>
+</div>
+
+
+<div class="container" style="margin-bottom:40px;">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 text-left">
+
+            <p> Para realizar el pago del pedido tendrás que ir al banco con los siguientes datos.</p>
+
+                <?php
+
+                $precioTotal=0;
+                foreach($this->_order['products'] as $product) {
+                    $precioTotal = $product['book']['formatos'][$product['formato']]['precio'];
+                }
+
+                if(isset($this->_code)) $precioTotal =  $precioTotal - ($precioTotal*$this->_code['quantity']/100 );
+
+                ?>
+
+            <p><strong>CONCEPTO:</strong> PAGO PEDIDO N-<?=$this->_order['orderID']?></p>
+            <p><strong>CANTIDAD:</strong> <?=$precioTotal?> Euros.</p>
+            <p><strong>Cuenta:</strong>	ES94 0081 0309 7100 0195 2499</p>
+            <p><strong>Titular:</strong>	GLORIA MARÍA VÉLEZ BERMÚDEZ</p>
+            <p><strong>Oficina:</strong> 0309 - MARQUESA VIUDA DE ALDAMA, 2-4,28100 ALCOBENDAS</p>
+            <p><strong>Teléfono:</strong> 916 545 100</p>
+        </div>
+    </div>
+</div>

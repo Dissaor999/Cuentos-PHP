@@ -1,0 +1,167 @@
+<div class="index-header">
+	<hgroup class="article__headline">
+		<h2 class="headline__secondary" ><span class="first-letter">Detalle Pedido</h2>
+
+	</hgroup>					
+</div>
+
+
+<div style="background: #f9f9f9;">
+
+    <br />
+
+    <?php
+    $product = $this->_data['order']['data'][0];
+
+    ?>
+
+
+    <div class="container">
+        <div style="">
+            <div class="row" style="margin-bottom: 30px">
+                <div class="col-lg-12 text-right">
+                    <a class="btn btn-default" href="<?= MENU_URL ?>user/orders"><i class="fa fa-chevron-left"></i> VOLVER A MIS PEDIDOS</a>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+
+
+                    <div class="row text-center">
+                        <div class="col-lg-4">
+
+                            <div class="white-box">
+                                <div class="box-title">
+                                    <h3>PEDIDO<br /><strong>#<?=$product['id']?></strong></h3>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+
+                            <div class="white-box">
+                                <div class="box-title">
+                                    <h3>ESTADO<br /><strong><?=$product['status_name']?></strong></h3>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+
+                            <div class="white-box">
+                                <div class="box-title">
+                                    <h3>FECHA<br /><strong><?=date('d/m/Y H:i:s',$product['date'])?></strong></h3>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row text-center">
+                        <div class="col-lg-4">
+
+                            <div class="white-box">
+                                <div class="box-title">
+                                    <h3>PRODUCTOS<br /><strong><?=sizeof($product['datas'])?></strong></h3>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+
+                            <div class="white-box">
+                                <div class="box-title">
+                                    <h3>Usuario<br /><strong>#<?=$product['user_id']?></strong></h3>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+
+                            <div class="white-box">
+                                <div class="box-title">
+                                    <h3>Total<br /><strong><?=$product['total_price']?>€</strong></h3>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="white-box">
+                        <div class="box-title">
+                            <h3>PRODUCTOS</h3>
+                        </div>
+                        <div class="box-content">
+                            <table class=" text-center table table-hover table-nomargin dataTable table-bordered">
+                                <thead>
+                                <tr>
+                                    <th width="50" class="text-center">ID</th>
+                                    <th width="50" class="text-center">Image</th>
+
+                                    <th  width="170"  class="text-center">Nombre</th>
+                                    <th width="70"  class="text-center">Cantidad</th>
+                                    <th width="70"  class="text-center">Precio Ud.</th>
+                                    <th width="70"  class="text-center">Precio Total.</th>
+                                    <th width="70"  class="text-center">Combination</th>
+
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                //echo '<pre>';print_r($this->_data['data']['projects']);echo '</pre>';
+                                if(isset($product['datas']) &&  sizeof($product['datas'])>0)
+                                    foreach($product['datas'] as $k => $row) {
+
+
+                                        ?>
+                                        <tr>
+                                            <td class="text-center"><?= $row['id'] ?></td>
+                                            <td style="text-align:center"><img style="display: block; height: 40px;" src="<?= $_layoutParams['public_img'] ?>products/thumbs/<?=$row['main_img'] ?>"/></td>
+
+                                            <td class="text-center"><?= $row['name'] ?></td>
+                                            <td class="text-center"><?= $row['quantity'] ?></td>
+                                            <td class="text-center"><?= $row['price'] ?>€</td>
+                                            <td class="text-center"><?= $row['quantity']*$row['price'] ?>€</td>
+
+                                            <td>
+                                                <div class="combination"><span style="height:10px;width:10px;    border-radius: 10px; display:inline-block; border: 1px solid <?=$row['combination']['border']?>; background:<?=$row['combination']['hex']?>;"></span> <?=$row['combination']['size_t']?> - <?=$row['combination']['price']?>€  </div>
+
+                                            </td>
+
+
+
+                                        </tr>
+                                        <?php
+                                    }
+                                ?>
+
+
+                                </tbody>
+                            </table>
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+<br />

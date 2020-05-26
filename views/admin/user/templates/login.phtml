@@ -1,0 +1,58 @@
+<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1 m-login--singin" id="m_login">
+    <div class="m-grid__item m-grid__item--order-tablet-and-mobile-2 m-login__aside">
+        <div class="m-stack m-stack--hor m-stack--desktop">
+            <div class="m-stack__item m-stack__item--fluid">
+                <div class="m-login__wrapper">
+                    <div class="m-login__logo">
+                        <a href="#">
+                            <img src="<?=ADMIN_LAYOUT_PATH?>assets/app/media/img//logos/logo-2.png">
+                        </a>
+                    </div>
+                    <div class="m-login__signin">
+                        <div class="m-login__head">
+                            <h3 class="m-login__title">
+                                Entra al administrador
+                            </h3>
+                        </div>
+                        <form method="POST"   action="<?= ADMIN_URL ?>user/makeLogin" accept-charset="UTF-8" role="form" class="m-login__form m-form" >
+
+                            <div class="form-group m-form__group">
+                                <input class="form-control m-input" type="text" placeholder="Nombre de usuario"  required name="username"  autocomplete="off">
+                            </div>
+                            <div class="form-group m-form__group">
+                                <input class="form-control m-input m-login__form-input--last" type="password" placeholder="Contraseña" name="password">
+                            </div>
+                            <div class="row m-login__form-sub">
+                                <div class="col m--align-left">
+                                    <label class="m-checkbox m-checkbox--focus">
+                                        <input type="checkbox" name="remember">
+                                        Recordar datos
+                                        <span></span>
+                                    </label>
+                                </div>
+                                <div class="col m--align-right">
+
+                                </div>
+                            </div>
+                            <div class="m-login__form-action">
+                                <button id="m_login_signin_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+                                    Iniciar Sesión
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content" style="background-image: url(<?=ADMIN_LAYOUT_PATH?>assets/app/media/img//bg/bg-4.jpg)">
+        <div class="m-grid__item m-grid__item--middle">
+
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,68 @@
+<?php
+    $steps = array(
+        'selecciona-cuento'=>array(
+            'number'=>1,
+            'title'=>'Selecciona el cuento',
+            'description'=>'Escoge el cuento que más te guste y personalízalo',
+        ),
+
+        'define-datos'=>array(
+            'number'=>2,
+            'title'=>'Datos del niño',
+            'description'=>'Escribe el nombre del niñ@ y continua a personalizar el avatar.',
+        ),
+
+        'haz-tu-personaje'=>array(
+            'number'=>3,
+            'title'=>'Haz tu personaje',
+            'description'=>'Personaliza el avatar para que se asemeje a tu niño y que sea un regalo único!',
+        ),
+
+        'ponle-dedicatoria'=>array(
+            'number'=>4,
+            'title'=>'Pon tu dedicatoria',
+            'description'=>'Quieres que aún sea más especial? Añádele una dedicatoria con su foto para darle ese último toque.',
+        ),
+        'como-quedaria'=>array(
+            'number'=>5,
+            'title'=>'¿Cómo quedaría?',
+            'description'=>'Quieres que aún sea más especial? Añádele una dedicatoria con su foto para darle ese último toque.',
+        ),
+        'formato'=>array(
+            'number'=>6,
+            'title'=>'Formato',
+            'description'=>'Escoge el formato del cuento, ¡el que más te guste!',
+        ),
+
+        'disfrutalo'=>array(
+            'number'=>7,
+            'title'=>'¡Disfrútalo!',
+            'description'=>'Escoge el cuento que más te guste y personalízalo',
+        ),
+
+
+
+    );
+
+?>
+<style>
+    .StepProgress {margin-top:30px;}
+    .StepProgress-item p {font-size:12px; margin-bottom:0px;display:none;}
+    .StepProgress .current p {display:block;}
+    .StepProgress-item:not(:last-child) {
+        padding-bottom: 10px;
+    }
+
+    .StepProgress-item.current:last-child {
+        border-left: none !Important ;
+    }
+
+</style>
+
+<ul class="StepProgress">
+    <?php
+    foreach($steps as $step) {
+        echo '<li class="StepProgress-item '.((STEP_NUMBER>$step['number'])?'is-done': '').' '.((STEP_NUMBER==$step['number'])? 'current': '').'"><strong>'.$step['title'].'</strong><p>'.$step['description'].'</p></li>';
+    }
+    ?>
+</ul>

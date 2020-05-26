@@ -1,0 +1,20 @@
+
+<div class="text-center">
+    <ul class="categories-inline">
+        <?php
+        if (isset($categorias) && sizeof($categorias) > 0)
+            foreach ($categorias as $categoria)
+                echo '<li><a href="' . BASE_URL . $this->_lang . DS . 'blog' . DS . '?c=' . $categoria['slug'] . '" class="'.(($this->_data['_category'] == $categoria['slug']) ? 'active':'').'">' . $categoria['nombre'] . '</a></li>';
+        else echo '<li>No hay categorías para mostrar</li>';
+        ?>
+    </ul>
+
+</div>
+
+<style>
+    .categories-inline{text-align:center; margin-top:10px;}
+    .categories-inline li{display:inline-block; margin-right: 10px; margin-bottom:10px; }
+    .categories-inline a {transition:all .3s ease-in-out; display:block; padding:5px 25px; border:1px solid #29abe2; border-radius:15px;  }
+    .categories-inline a:hover {background: #29abe2; color:white;  }
+    .categories-inline a.active {background: #29abe2; color:white;  }
+</style>

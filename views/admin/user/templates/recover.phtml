@@ -1,0 +1,151 @@
+<div class="index-header">
+    <hgroup class="article__headline">
+        <h2 class="headline__secondary" ><span class="first-letter">Recuperar Contraseña</h2>
+    </hgroup>
+</div>
+
+
+<div style="background:#f9f9f9;">
+    <div class="container" style=">
+    <!-- start section filter -->
+   <div class="row">
+
+        <div class="col-sm-7 col-sm-offset-3" style="
+        box-shadow: 0 0 10px rgba(0,0,0,.2); background:#fff; border-radius:30px;padding:30px;color:#333;margin-top:80px;margin-bottom:80px;">
+
+                <h2 class="login-box-msg text-center" style="margin: 10px 0;">¿OLVIDÓ SU CONTRASEÑA?</h2>
+                <br />
+                <form method="POST" id="forget-form"  action="<?= BASE_URL ?>user/f_recover" accept-charset="UTF-8" role="form" class="login-form">
+                    <input type="hidden" name="token" value="<?=$_GET['token']?>" />
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group has-feedback">
+                                <input placeholder="Contraseña" class="unfield " name="password" type="password" value="">
+                                <span class="fa fa-lock form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group has-feedback">
+                                <input placeholder="Repite Contraseña" class="unfield " name="repassword" type="password" value="">
+                                <span class="fa fa-lock form-control-feedback"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+
+                        <div class="col-sm-10 col-sm-offset-1"">
+                        <button id="btn_submit" type="submit" class="btn btn-primary btn-block btn-flat">Recuperar</button>
+
+                    </div><!-- /.col -->
+            </div>
+            </form>
+            <?php if(isset($_GET['error'])) {
+                ?>
+                <div class="row">
+                    <div class="alert alert-danger col-sm-12">
+                        <?php
+                        switch($_GET['error']){
+                            case 1:
+                                echo 'El usuario o la contraseña no coinciden.';
+                                break;
+                            case 2:
+                                echo 'El usuario no está activo.';
+                                break;
+                            case 3:
+                                echo 'El usuario ha sido baneado.';
+                                break;
+                            default:
+                                echo 'El usuario o la contraseña no coinciden.';
+                                break;
+                        }
+                        ?>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
+
+        </div>
+
+        </div> <!-- end row -->
+    </div> <!-- end container -->
+</div> <!-- end container -->
+
+
+<script>
+    $(document).ready(function() {
+    //Formulario contactForm
+    var cntactFrm = '#forget-form';
+
+
+    //Validacion previa de datos del formulario de pre-registro
+    $(cntactFrm).validate({
+
+        rules:{
+            'd[username]':{
+                required: true,
+                rangelength: [2,250]
+            }
+        },
+
+    });
+
+    $(cntactFrm).submit(function(e){
+        var formId = $(this).attr('id');
+        e.preventDefault();
+        $(cntactFrm+"_result").fadeOut("fast").html("");
+
+        //Loading
+        $(cntactFrm).find('button.submit i').remove();
+        $(cntactFrm).find('.submit').prepend('<i class="fa fa-spinner fa-spin mr10"></i>');
+
+
+        if ($(cntactFrm).valid()) {
+            $(cntactFrm+"_result").remove();
+            $(cntactFrm).parent().append('<div id="'+formId+'_result"></div>');
+            $.ajax({
+                type: $(cntactFrm).attr("method"),
+                url: $(cntactFrm).attr("action"),
+                data: $(cntactFrm).serialize(),
+                async:true,
+                cache: false,
+                dataType: "json",
+                global: true,
+                ifModified: false,
+                processData:true,
+                success: function(datos) {
+                    $(cntactFrm).find('button.submit i').remove();
+                    var success = datos["success"];
+                    var message = datos["message"];
+                    var errors = datos["errors"];
+                    if(success>0) {
+                        //Reset inputs
+                        $(cntactFrm).each(function(){this.reset();}).remove();
+                        if(datos['return'].length>0) window.location.href = datos['return'];
+                        //Show Response
+                        $(cntactFrm+"_result").html('<div class="alert alert-success" style="margin-top: 0;margin-bottom: 50px;"><i class="fa  fa-check-circle"></i> '+message+"</div>").fadeIn("slow");
+                    }
+                    else {
+                        var errorsh = '';
+                        $(errors).each(function(i,v){
+                            errorsh += v;
+
+                        }) ;
+                        $(cntactFrm+"_result").html('<div class="alert alert-danger" style="margin-top: 0;margin-bottom: 50px;"><i class="fa fa-times-circle"></i> '+message+". <p>Errores: "+errorsh+"</p></div>").fadeIn("fast");
+
+                    }
+
+                }
+            });
+
+        }
+        else {
+            $(cntactFrm).find('button.submit i').remove();
+            $(cntactFrm+"_result").html('<p class="alert" style="margin-top: 0;margin-bottom: 50px;">Hay campos erroneos</p>').fadeIn("fast").delay("1000").fadeOut("fast");
+        }
+        return false;
+    });
+    });
+</script>

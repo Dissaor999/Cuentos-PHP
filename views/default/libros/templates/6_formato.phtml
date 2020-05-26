@@ -1,0 +1,90 @@
+<?php
+$book = $this->book;
+?>
+
+<div class="book-heading"
+     style="padding: 70px 0 160px; background-image: url(<?php echo $_layoutParams['public_img'] ?>books/<?php echo $book['slug'] ?>/heading.jpg);background-position: center; background-size: cover; background-repeat: no-repeat;">
+    <div class="overlay"></div>
+    <div class=" text-center">
+        <h1 class="title-heading" style="color:white"><?php echo $book['name'] ?></h1>
+    </div>
+</div>
+
+
+<div class="container" style="margin-bottom:200px;">
+    <div class="row">
+        <form action="<?= MENU_URL ?>cart/addToCart/" method="POST">
+
+
+            <!-- COLUMNA DERECHA -->
+            <div class="col-sm-9 text-left "
+                 style="margin-top:20px; background: rgba(255,255,255,.95); border-radius:40px;padding:30px">
+                <div class="form-container">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="required">Formato del cuento</label>
+
+
+
+                        <?php $i=1; foreach($book['formatos'] as $formato) {
+                            ?>
+                            <div class="method ">
+                                <span><strong><?=$formato['nombre']?></strong> - <?=number_format(doubleval($formato['precio']),2)?>€</span>
+                                <div class="icons">
+                                    <img src="<?= $_layoutParams['public_img'] ?>cart/tipos_libro/<?=$formato['id']?>.png">
+
+                                </div>
+                                <div class="text"><?=$formato['text']?></div>
+                                <input type="radio" id="format_<?=$formato['id']?>" name="formato" <?=(($i==1) ?'checked':'' )?> required value="<?=$formato['id']?>"  />
+                            </div>
+                            <?php
+                            $i++;
+                        } ?>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a class="btn btn-orange-outline" style="width:100%;" href="javascript: history.go(-1)"><i class="fa fa-angle-left"></i>
+                            DEDICATORIA
+                        </a>
+                    </div>
+                    <div class="col-sm-6">
+
+                        <button class="btn btn-orange" style="width:100%;">¡Añádelo al carrito! <i  class="fa fa-shopping-cart"></i></button>
+
+                        <?php
+                        $args_parse = array(
+                            'book_slug' => $book['slug'],
+                            'name' => $_POST['name'],
+                            'gender' => $_POST['gender'],
+                            'skin_image' => $_POST['skin_image'],
+                            'hair_style' => $_POST['hair_style'],
+                            'hair_image' => $_POST['hair_image'],
+                            'eyes_image' => $_POST['eyes_image'],
+                            'clothes_image' => $_POST['clothes_image'],
+                            'glasses_style' => $_POST['glasses_style'],
+                            'dedicatoria' => @$_POST['dedicatoria'],
+                            'dedicatoria_img' => @$_POST['dedicatoria_img'],
+                        );
+                        foreach ($args_parse as $k => $v)
+                            echo '
+                            <input type="hidden" name="' . $k . '" value="' . $v . '" />
+                            ';
+                        ?>
+
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+
+        <div class="col-sm-3 ">
+            <?php define('STEP_NUMBER', 6);
+            include('parts/steps.phtml'); ?>
+        </div>
+    </div>
+
+</div>
+</div>
+

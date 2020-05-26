@@ -1,0 +1,241 @@
+<div class="page-heading text-center">
+    <h1>Carrito</h1>
+</div>
+<style>
+    .page-heading h1 {color:white !important;}
+	mb20 {margin-bottom:20px;}
+    select {background:#eee;color:#999;border:none;font-weight:bold;border-radius:0px;}
+
+    .submit{
+        border: 1px solid #444;
+        padding: 6px 25px;
+        /* margin-top: 10px; */
+        text-transform: uppercase;
+        font-size: 18px;
+        margin: 2px auto;
+        display: block;
+        border-radius: 15px;
+        background: white;
+
+    }
+
+    .range{
+        display: inline-block !important;
+        width: 80% !important;
+        top: 6px;
+        float: right;
+        position: relative;
+        margin-left: 10px;}
+
+    .color-picker {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        top: 7px;
+        position: relative;
+        margin-left: 10px;
+    }
+    .color-picker li {
+        display: inline-block;
+        margin: 2px 3px;
+        border-radius: 100%;
+        width: 26px;
+        height: 26px;
+    }
+    .color-picker li.red {background-color:red;}
+    .color-picker li.green {background-color:green;}
+    .color-picker li.yellow {background-color:yellow;}
+    .color-picker li.orange {background-color:orange;}
+    .color-picker li.black {background-color:black;}
+
+    label {display:inline-block}
+</style>
+
+<div class="container">
+
+    <?php
+    if(isset($_GET['success']) && $_GET['success']>0) {
+        echo '<div class="alert alert-success">Se ha añadido satisfactoriamente.</div>';
+    }
+    if(isset($_GET['error']) && $_GET['error']>0) {
+        echo '<div class="alert alert-error">No se ha podido añador.</div>';
+    }
+
+    ?>
+<style>
+    .input-helper{font-size:.8rem;color:#999;position:absolute;right:10px;top:-7px;background-color:#fff;text-align:right;padding:0 5px}
+
+    .btn-prod {font-size: 14px;
+        color: #ccc;
+        border: 1px solid #ccc;
+        display: block;
+        padding: 5px;
+        text-align:center;
+        transition: all .3s ease-in-out;
+    }
+    .btn-prod:hover{
+        background: #ccc;
+       text-decoration:none;
+        color:#fff;
+    }
+    .precio {
+        color: #e8b470;
+        font-weight: bold;
+        display: block;
+        padding: 6px 0;
+    }
+    .product-list {margin-bottom:20px;padding:10px;}
+
+    .product-list img.main-img{width:70%; display:block; margin: 0 auto;}
+
+    .cart-list h1,
+    .cart-list h2,
+    .cart-list h3,
+    .cart-list h4,
+    .cart-list h5{
+        margin: 10px 0;
+    }
+    .cart-product {
+        border-bottom: 1px solid #777;
+    }
+
+    .cart-product h1,
+    .cart-product h2,
+    .cart-product h3,
+    .cart-product h4,
+    .cart-product h5{
+        margin: 25px 0;
+    }
+
+    .btn-borrar-prod{margin-top:20px; border: 2px solid #c9302c; color:#c9302c; display:inline-block; height:40px; font-size: 23px;width:40px;border-radius:100%; text-align:center;}
+    .btn-borrar-prod:hover{background:#c9302c; color:#fff;}
+
+    .libro-cart {
+        box-shadow: 0 0 0 4px rgba(0,0,0,0.1);
+        border-radius:4px;
+        background:#fff;
+        margin-bottom:30px;
+    }
+
+    .libro-cart .book_price_cart {
+        font-size: 20px;
+        color: #f36563;
+    }
+    .info-box {
+        padding:30px 0;
+        font-family:Roboto;
+    }
+    .price-box {
+        padding:10px 30px;
+    }
+    .cart-book-name {font-family: "Gloria Hallelujah"; color:#0a7ae2; margin: 2px 0;}
+
+    .book-remove-cart {font-family:Roboto;}
+</style>
+    <br />
+    <br />
+    <?php
+    $precio_total=0;
+    if(isset($this->_cartItems) && sizeof($this->_cartItems)>0) { ?>
+    <div class="checkout-list">
+        <?php
+            foreach($this->_cartItems as $cart_item) {
+
+                ?>
+                <div class="libro-cart">
+                    <div class="row " >
+                        <div class="col-sm-3 text-center">
+                            <img style="border-radius:30px; margin-top:20px; box-shadow: 0 0 4px  rgba(0, 0,0,.3); width:200px;" src="<?=BASE_URL?>libros/generateAvatar/?<?=
+                            'book_slug=' . @$cart_item['book']['slug'] .
+                            '&gender=' . @$cart_item['custom_avatar']['gender'] .
+                            '&glassesStyle=' . $cart_item['custom_avatar']['glassesStyle'] .
+                            '&skinColor=' . $cart_item['custom_avatar']['skinColor'] .
+                            '&hairStyle=' . @$cart_item['custom_avatar']['hairStyle'] .
+                            '&hairColor=' . @$cart_item['custom_avatar']['hairColor'] .
+                            '&eyesColor=' . @$cart_item['custom_avatar']['eyesColor'] .
+                            '&clothesColor=' . @$cart_item['custom_avatar']['clothesColor']
+                            ?>" />
+                        </div>
+
+                        <div class="col-sm-6 ">
+                           <div class="info-box">
+
+                            <h2 class="cart-book-name"><?=$cart_item['book']['name']?></h2>
+                               <hr />
+                               <div><label>Prota:</label> <span class="avatar_name_cart"><?=$cart_item['custom_avatar']['name']?></span></div>
+                                <div><label>Dedicatoria:</label> <span class="dedicatoria_cart"><?=$cart_item['dedicatoria']['text']?></span></div>
+                           </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <div class="info-box">
+                                <div class="price-box text-center">
+                                <div>
+                                    Precio
+                                    <br />
+                                    <span class="book_price_cart"><?=$cart_item['book']['formatos'][$cart_item['formato']]['nombre']?><br /><?=$cart_item['book']['formatos'][$cart_item['formato']]['precio']?>€</span>
+                                </div>
+                            </div>
+
+
+                            <div class="actions-box text-center">
+                                <span class="book-remove-cart"><a href="<?=MENU_URL?>cart/removeItem/?item=<?= $cart_item['id-object']?>" class="btn btn-orange-outline btn-xs"><i class="fa fa-trash"></i> Quitar</a></span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php
+
+                $precio_total+=$cart_item['book']['formatos'][$cart_item['formato']]['precio'];
+            }
+
+        ?>
+
+        </div>
+
+
+
+    <div class="row" style="padding-top:0px; margin-bottom:5px; padding-bottom:0px; border-bottom:1px solid #888;">
+
+
+        <div class="col-sm-offset-8 col-sm-2"><strong style="color:#333; font-size:23px; line-height:2em; font-family: Montserrat;">TOTAL</strong></div>
+        <div class="col-sm-2"><div style="color:#f1b577; font-size:25px; font-family: Montserrat;" class="checkout subtotal"><div class="price" style="display:inline-block"><?=$precio_total?></div> €</div></div>
+
+    </div>
+
+
+
+<div class="row" style="padding-top:10px; margin-bottom:5px; padding-bottom:10px;">
+        <div class="col-sm-6 col-xs-12 text-left"><a href="/" class="btn btn-outline-blue   " >¡PEDIR MÁS CUENTOS!</a></div>
+
+        <div class="col-sm-6 col-xs-12 text-right">
+            <form id="solicitarProductos"  action="<?=BASE_URL?>cart/solicitar" method="POST">
+                <a href="<?=MENU_URL?>cart/datos/" id="" type="submit" class="btn btn-orange" style="">¡LOS QUIERO! <i class="fa fa-shopping-cart"></i></a>
+            </form>
+        </div>
+    </div>
+
+</div>
+<?php
+}else {
+        ?>
+
+
+    <div class="text-center">
+        <h1>Oops!</h1>
+        <h3>¡No has añadido cuentos a la cesta!</h3>
+        <br />
+        <br />
+        <a class="btn btn-orange" href="<?=MENU_URL?>libros">VER TODOS LOS CUENTOS</a>
+        <br />
+        <br />
+    </div>
+<?php
+}
+?>
+
+
+    </div> <!-- end row -->
+</div> <!-- end container -->
+<br />
+<br />

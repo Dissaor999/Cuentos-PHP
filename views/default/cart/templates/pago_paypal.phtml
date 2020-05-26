@@ -1,0 +1,84 @@
+<div class="page-heading text-center">
+    <h1>Carrito</h1>
+</div>
+
+<div class="container">
+<div class="row">
+    <div class="col-sm-12">
+
+        <br />
+        <br />
+        <p class="text-center" style="font-size:25px;">
+            A continuación, procederás a la página de pago de Paypal. Si no eres redireccionado por favor pulsa el botón para ir a la pasarela de pago.
+            <br />
+            <br />
+            ¡Muchas Gracias!
+        </p>
+        <br />
+        <?php
+
+
+/*
+ *  <input name="bn" value="PP-BuyNowBF" type="hidden">
+            <input name="tax" value="0" type="hidden">
+            <input name="rm" value="2" type="hidden">*/
+
+        echo '
+        <form id="paypal_checkout" action="'.$this->_url.'" method="post">
+            <input name="cmd" value="_xclick" type="hidden">
+     
+           
+
+            <input name="display" value="0" type="hidden">
+            <input name="business" value="info@micuentomagico.com" type="hidden">
+            <input name="handling_cart" value="0" type="hidden">
+            <input name="currency_code" value="EUR" type="hidden">
+            <input name="lc" value="ES" type="hidden">
+
+            <input name="shopping_url" value="'.MENU_URL.'cart/pagar" type="hidden">
+
+            <input name="cbt" value="Volver a '.APP_NAME.'" type="hidden">
+            <input name="cancel_return" value="'.MENU_URL.'cart/pagar" type="hidden">
+            <input name="order_token" value="'.($this->_order['orderID']).'" type="hidden">
+            
+            
+            <input type="hidden" name="button_subtype" value="services">
+
+            <input name="return" value="'.$this->_urlOK.'" type="hidden">
+            <input name="return_cancel" value="'.$this->urlKO.'" type="hidden">
+
+
+            <input name="notify_url" value="'.$this->_notifyurl.'/'.$this->_order['orderID'].'" type="hidden">
+            <input type="hidden" name="callback_timeout" value="3">
+            <input type="hidden" name="callback_version" value="61"><!--Required! -->
+
+
+
+
+            <input type="hidden" name="merchant_transaction_id" value="'.($this->_order['orderID']).'">
+            <input type="hidden" name="merchant_logo" value="'.$_layoutParams['public_img'].'micuentomagico.png">
+          
+                <input name="amount" value="'.$this->_amount.'" type="hidden">
+                <input name="item_name" value="Pedido '.$this->_order['orderID'].'" type="hidden">
+                
+            
+
+          
+
+
+            <input id="ppcheckoutbtn" value="Proceder al pago en Paypal" class="btn btn-orange button" type="submit">
+        </form>';
+
+
+            ?>
+
+        <br />
+        <br />
+        <br />
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    //document.getElementById('paypal_checkout').submit();
+</script>

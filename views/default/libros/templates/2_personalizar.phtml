@@ -1,0 +1,99 @@
+
+<?php
+$book = $this->book;
+?>
+
+
+<div class="book-heading" style="padding: 70px 0 160px; background-image: url(<?php echo $_layoutParams['public_img'] ?>books/<?php echo $book['slug'] ?>/heading.jpg);background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;">
+    <div class="overlay"></div>
+    <div class=" text-center">
+        <h1 class="title-heading" style="color:white"><?php echo $book['name'] ?></h1>
+    </div>
+
+</div>
+<style>
+    .gender-image {
+        border:1px solid #e6e6e6;
+        border-radius:100%;
+        height:220px;
+        width:220px;
+        overflow:hidden;
+        text-align:center;
+        position:relative;
+        margin:0 auto;
+
+    } .gender-image img {
+        position:absolute;
+        bottom:0px;
+        left:0;
+        right:0;
+        margin:0 auto;
+      }
+</style>
+<div class="" style="padding-bottom:150px;">
+    <div class="container">
+        <div class="row">
+
+            <div class=" col-sm-8 text-center " style="box-shadow: 0 0 50px rgba(0,0,0,.1); border-radius:40px; padding:30px; background:rgba(255,255,255,1); margin-top:-40px; padding-top:30px">
+
+                <form action="<?php echo MENU_URL ?>libros/personalizar_personaje/<?php echo $book['slug'] ?>" method="GET">
+                    <br />
+
+
+                    <div class="mb30">
+                        <label class="input-label">¿Para quién es?</label>
+                        <br />
+                        <ul class="row grid grid-gutter">
+                            <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+
+                                <div class="gender-image"><img src="<?php echo $_layoutParams['public_img'] ?>books/<?php echo $book['slug'] ?>/gender/gender1.png"></div>
+                                <div class="gender-selector gender-selected">
+                                    <input type="radio" id="buy_avatar_gender_0" name="gender" value="1" required checked="checked">
+                                    <label for="buy_avatar_gender_0">Niño</label>
+                                </div>
+                            </li>
+                            <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="gender-image"><img src="<?php echo $_layoutParams['public_img'] ?>books/<?php echo $book['slug'] ?>/gender/gender2.png"></div>
+                                <div class="gender-selector ">
+                                    <input type="radio" id="buy_avatar_gender_1" name="gender" required value="2">
+
+                                    <label for="buy_avatar_gender_1">Niña</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <br/>
+                    <div class="mb30">
+                        <label class="input-label">Nombre del prota:</label>
+                        <br />
+
+                        <input type="text" class="name-changer" maxlength="15" required value="<?=@$_GET['name']?>" name="name" placeholder="" style="width:100%;">
+                    </div>
+
+
+                    <br/>
+                    <br/>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a class="btn btn-outline-orange" style="width:100%;"  onclick="window.history.back();"> <i class="fa fa-angle-left"></i> DATOS DEL CUENTO</a>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-orange" type="SUBMIT" style="width:100%;">CREA TU PERSONAJE <i class="fa fa-angle-right"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-3 col-sm-offset-1 ">
+
+                <?php define('STEP_NUMBER', 2); include('parts/steps.phtml'); ?>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</div>

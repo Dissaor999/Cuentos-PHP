@@ -1,0 +1,97 @@
+<?php
+$cupones = $this->_data['cupones'];
+?>
+
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title ">
+                Dashboard
+            </h3>
+        </div>
+        <a href="<?= ADMIN_URL.$this->_controlador ?>/add" class=' pull-right btn btn-success'><i class=" fa fa-plus"></i> Crear nuevo cupón</a>
+    </div>
+</div>
+
+
+
+
+<div class="m-content">
+
+    <!-- END: Subheader -->
+
+    <div class="m-portlet">
+
+        <div class="m-portlet__head">
+
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        Posts List
+                    </h3>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="m-portlet__body">
+            <!--begin::Section-->
+            <div class="m-section m-section--last">
+                <div class="m-section__content">
+
+                    <table class="table table-hover table-nomargin dataTable table-bordered">
+                        <thead>
+                        <tr>
+                            <th width="50">ID</th>
+
+                            <th  width="170">CÓDIGO</th>
+                            <th  width="170">Nombre</th>
+
+                            <th width="70">Cantidad</th>
+
+                            <th width="70">Fecha Inicio</th>
+
+                            <th width="60">Fecha Fin</th>
+
+                            <th width="60">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        //echo '<pre>';print_r($cupones['data']);echo '</pre>';
+                        if(isset($cupones) &&  sizeof($cupones)>0)
+                            foreach($cupones as $k => $row) {?>
+                                <tr>
+                                    <td><?= $row['id'] ?></td>
+                                    <td><?= $row['code'] ?></td>
+                                     <td><?= $row['name'] ?></td>
+                                     <td><?= $row['quantity'] ?>%</td>
+
+                                    <td><?= date('d/m/Y', $row['date_init']) ?></td>
+                                    <td><?= date('d/m/Y', $row['date_finish'])  ?></td>
+
+
+                                    <td>
+                                        <a href="<?= ADMIN_URL.$this->_controlador ?>/edit/<?= $row['id'] ?>" title="Modificar" class="btn btn-xs btn-warning">&nbsp;<i class="icon fa fa-pencil">&nbsp;</i></a>
+                                        <a href="<?= ADMIN_URL.$this->_controlador ?>/delete/<?= $row['id'] ?>" title="Borrar" class="btn btn-xs btn-danger">&nbsp;<i class="icon fa fa-trash-o">&nbsp;</i></a>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        ?>
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

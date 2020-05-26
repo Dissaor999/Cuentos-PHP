@@ -1,0 +1,75 @@
+<?php 
+	$news = $this->_data['categorias'];
+
+?>
+
+
+<style>
+    .white-box {
+        background:white;
+        padding:20px;
+        margin-bottom:10px;
+    }
+</style>
+
+
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title ">
+                Listado de categorías del blog
+            </h3>
+        </div>
+        <a href="<?= ADMIN_URL.$this->_controlador ?>/add" class=' pull-right btn btn-success'><i class=" fa fa-plus"></i> Crear nueva</a>
+    </div>
+</div>
+<div class="m-content">
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+								
+                                <table class="table table-hover table-nomargin dataTable table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th width="50">ID</th>
+
+                                        <th  width="170">SLUG</th>
+                                        <th  width="170">Nombre</th>
+
+
+                                        <th width="60">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    //echo '<pre>';print_r($this->_data['data']['projects']);echo '</pre>';
+                                    if(isset($news['data']) &&  sizeof($news['data'])>0)
+                                    foreach($news['data'] as $k => $row) {?>
+                                        <tr>
+                                            <td><?= $row['id'] ?></td>
+
+                                            <td><?= $row['slug'] ?></td>
+                                            <td><?= $row['nombre'] ?></td>
+
+
+                                            <td>
+                                                <a href="<?= ADMIN_URL.$this->_controlador ?>/edit/<?= $row['id'] ?>" title="Modificar" class="btn btn-xs btn-warning">&nbsp;<i class="icon fa fa-pencil">&nbsp;</i></a>
+                                                <a href="<?= ADMIN_URL.$this->_controlador ?>/delete/<?= $row['id'] ?>" title="Borrar" class="btn btn-xs btn-danger">&nbsp;<i class="icon fa fa-trash-o">&nbsp;</i></a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+
+
+                                </tbody>
+                            </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+

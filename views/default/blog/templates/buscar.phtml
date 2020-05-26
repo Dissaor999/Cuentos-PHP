@@ -1,0 +1,148 @@
+<?php
+	$lastNew = $this->_data['lastNew']['data'];
+	$categorias = $this->_data['categoriasBlog']['data'];
+?>
+<div id="head-comunicacion" class="page-breadcrumbs">
+	<div class="container">
+		<h1>NOTICIAS</h1>
+		
+	</div>
+</div>
+<style>
+	.btag {
+		    border: 1px solid #e6007e;
+			color: #e6007e;
+			padding: 3px 7px;
+			margin: 2px 3px;
+			font-size: 15px;
+			font-style: normal;
+		}
+	.btag:hover {background:#e6007e;color:#fff;}
+</style>
+<div class="page-main">
+	<div class="container">
+		 <div class="row">
+          <div class="col-sm-8 col-md-8 col-lg-8">
+		  <h2 style="font-weight:600">Noticias que contienen: <strong><?=$this->_data['search']?></strong></h2>
+		  <hr />
+            <div class="blog_large">
+				<?php
+					foreach($lastNew as $new){
+						$categorias_html = '';
+						if(isset($new['categoriasBlog'])) {
+							$categorias_html = '<strong>Categorías: </strong>';
+							foreach($new['categoriasBlog'] as $categoria) $categorias_html .= '<a class="btag" href="'.BASE_URL.$this->_lang.DS.'noticias'.DS.'categoria'.DS.$categoria['slug'].'">'.$categoria['nombre'].'</a>';
+						}
+						?>
+						
+						 <!-- Post Static Image Start-->
+              <article class="post noticia_lista"  date="<?=$new['fecha'] ?>">
+                <div class="post_date"> <span class="day"><?= date('d', $new['fecha']) ?><a href="#" class="month"><?= date('M', $new['fecha']) ?></a></span>  </div>
+                <div class="post_content medium">
+                  <figure class="post_img"> <img src="<?= $_layoutParams['public_img'].'noticias'.DS.'thumbs'.DS.$new['img_thumb'] ?>" width="700" height="370" alt=" "> </figure>
+                  <div class="post_meta">
+                    <h2> <a href="<?= BASE_URL.$this->_lang.DS.'noticias'.DS.'ver'.DS.$new['slug']?>"><?= $new['titulo'] ?></a></h2>
+                    <div class="metaInfo">
+						<?= @$categorias_html ?>
+					</div>
+                    <p><?= html_entity_decode($new['descripcion_corta']) ?></p>
+                    <a href="<?= BASE_URL.$this->_lang.DS.'noticias'.DS.'ver'.DS.$new['slug']?>" class="btn btn-small btn-default readmore">LEER MÁS</a> </div>
+                </div>
+              </article>
+              <!-- Post Static Image End--> 
+			  
+			  <?php
+					}
+				?>
+				
+				
+             
+              
+            </div>
+			
+			
+			<?php
+				$res = $this->_data['results']['data']['count'];
+				$limitP = $this->_data['layoutParamsosts'];
+				$paginas = $res/$limitP;
+				for($it=1; $it<=$paginas;$it++) {echo '<a href="'.BASE_URL.$this->_lang.'/noticias/p/'.($it).'" class="pagination-page '.(($it==$this->_data['actual']) ?'active':'').'" >'.($it).'</a>';}
+			?>
+			
+			
+          </div>
+          <style>
+			.pagination-page{border:1px solid lightgrey;font-size:20px; padding:9px 14px; margin : 2px;}
+			.pagination-page.active{background:#e6007e; border-color:#e6007e; color:#fff;}
+			.pagination-page:hover{border-color:#e6007e; color:#e6007e;}
+			
+			.pagination-page.active:hover{border-color:#e6007e; color:#fff;}
+			.brb{border-bottom:1px solid #ddd; position:relative; margin:0px 0 10px;}
+			.brb:after {
+				content: ' ';
+				position: absolute;
+				bottom: -2px;
+				right: 0px;
+				left: 0;
+				width: 40px;
+				height: 3px;
+				background: #e6007e;
+				display: table;
+			}
+	
+		  </style>
+          <!--Sidebar Widget-->
+          <aside class="col-sm-4 col-md-4 col-lg-4 sidebar">
+            <div class="sidebar_widget">
+              <div class="sw_search">
+                <div class="sw_title">
+                  <h4>BUSCAR</h4>
+				  <div class="brb"></div>
+                </div>
+                <div class="site-search-area">
+                  <form method="get" id="site-searchform" action="<?= BASE_URL.$this->_lang ?>/noticias/buscar/">
+                    <div>
+                      <input class="input-text" name="q" id="s" placeholder="Escribe.." type="text" />
+                      <input id="searchsubmit" value="Search" type="submit" />
+                    </div>
+                  </form>
+                </div>
+                <!-- end site search --> 
+              </div>
+              <div class="sw_categories">
+                <div class="sw_title">
+                  <h4>CATEGORÍAS</h4>
+				  <div class="brb"></div>
+                </div>
+                <ul class="arrows_list">
+					<?php
+						if(isset($categorias) && sizeof($categorias)>0)
+							foreach($categorias as $categoria) {
+								echo '<li><a href="'.BASE_URL.$this->_lang.DS.'noticias'.DS.'categoria'.DS.$categoria['slug'].'">'.$categoria['nombre'].'</a></li>';
+							}
+						else
+							echo '<li>No hay categorías para mostrar</li>';
+					?>
+				
+                </ul>
+              </div>
+              <div class="sw_archives">
+                <div class="sw_title">
+                  <h4>ENTRADAS RECIENTES</h4>
+				  <div class="brb"></div>
+                </div>
+                <ul class="archives_list">
+					<?php
+						foreach($lastNew as $new){
+							echo '<li><a href="'.BASE_URL.$this->_lang.DS.'noticias'.DS.'ver'.DS.$new['slug'].'">'.$new['titulo'].'</a></li>';
+						}
+					?>
+				  </ul>
+              </div>
+              
+            </div>
+          </aside>
+        </div>
+        <!--/.row-->
+       
+	</div>
+</div>

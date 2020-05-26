@@ -1,0 +1,32 @@
+<div class="page-heading text-center">
+    <h1>Pago con Redsys</h1>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 text-center">
+
+            <p> A continuación, procederás a la página de pago. Si en unos segundos sigues aquí, por favor pulsa el botón para ir a la pasarela de pago.
+
+                <br />
+                <br />
+                ¡Muchas Gracias!</p>
+
+            <form name="frm" id="tpvForm" action="<?=$this->_url?>" method="POST" >
+                 <input type="hidden" name="Ds_SignatureVersion" value="<?php echo $this->_version; ?>"/></br>
+                 <input type="hidden" name="Ds_MerchantParameters" value="<?php echo $this->_params; ?>"/></br>
+                 <input type="hidden" name="Ds_Signature" value="<?php echo $this->_signature; ?>"/>
+
+                <input  value = "Proceder al pago" class = "btn btn-orange button" type = "submit">
+            </form>
+            <script type="text/javascript">
+               document.getElementById('tpvForm').submit();
+            </script>
+        </div>
+    </div>
+</div>
+</br>
+</br>
+</br>
+</br>

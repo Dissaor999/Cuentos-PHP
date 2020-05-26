@@ -1,0 +1,67 @@
+<div class="white-box">
+    <div class="box-title">
+        <a id="" href="<?=MENU_URL .$this->_controlador?>/add_combination/<?=$product['id']?>" class="btn btn-xl btn-primary pull-right"><i class="fa fa-plus-circle"></i> AÑADIR NUEVA</a>
+        <h3>Combinaciones</h3>
+
+
+    </div>
+    <div class="box-content">
+
+
+        <div class="combinations-list">
+            <table class="table ">
+                <thead>
+                <tr>
+                    <th width="50">ID</th>
+                    <th width="120">SKU</th>
+                    <th width="">Color</th>
+                    <th  width="">Alto x Ancho</th>
+                    <th  width="">Acabado</th>
+                    <th width="">Precio</th>
+                    <th width="120">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                <?php
+                $combinaciones = @$product['combinations'];
+                if(isset($combinaciones) && sizeof($combinaciones)>0)
+                    foreach($combinaciones  as $combination) { ?>
+
+                        <tr class="<?= (($comb['id'] == $combination['id']) ? 'blue-bordered' : ' no-selected')?>">
+                            <td><?= $combination['id'] ?></td>
+                            <td><?= $combination['sku'] ?></td>
+                            <td><span style="height:20px; display:inline-block; vertical-align:bottom; width:20px; background: <?= @$combination['hex']?>; border: 1px solid <?=@$combination['border']?>;"></span> <?= $combination['color_t'] ?></td>
+                            <td><?= $combination['alto'] ?>x<?= $combination['ancho'] ?>cm</td>
+                            <td><?= $combination['acabado'] ?></td>
+                            <td><?= $combination['price'] ?></td>
+                            <td class="text-right">
+
+                                <?php
+
+                                if (isset($comb) && $comb['id'] == $combination['id']) {
+                                    ?> <a href="#"
+                                          title="Editando" class="btn btn-xs btn-success">EDITANDO ACTUALMENTE</a> <?php
+
+                                }else {
+                                    ?>  <a href="<?= MENU_URL . $this->_controlador ?>/edit_combination/<?= $combination['id'] ?>"
+                                           title="Modificar" class="btn btn-xs btn-warning">&nbsp;<i
+                                            class="icon fa fa-pencil">&nbsp;</i></a> <?php
+                                }
+
+                                ?>
+
+                                <a href="<?= MENU_URL . $this->_controlador ?>/delete_combination/<?= $combination['id'] ?>"
+                                   title="Borrar" class="btn btn-xs btn-danger">&nbsp;<i
+                                        class="icon fa fa-trash-o">&nbsp;</i></a>
+                            </td>
+                        </tr>
+
+                    <?php } ?>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

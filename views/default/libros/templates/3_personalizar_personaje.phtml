@@ -1,0 +1,317 @@
+<?php
+$book = $this->book;
+
+
+$gender_text = '';
+
+switch ($_GET['gender']) {
+    case '1':
+        $gender_text = 'male';
+        break;
+    case '2':
+        $gender_text = 'female';
+        break;
+
+}
+?>
+<div class="book-heading"
+     style="padding: 70px 0 160px; background-image: url(<?php echo $_layoutParams['public_img'] ?>books/<?php echo $book['slug'] ?>/heading.jpg);background-position: center; background-size: cover; background-repeat: no-repeat;">
+    <div class="overlay"></div>
+    <div class=" text-center">
+        <h1 class="title-heading" style="color:white"><?php echo $book['name'] ?></h1>
+    </div>
+</div>
+
+
+<div style="padding-bottom:160px;">
+    <div class=" container">
+        <div class="row">
+            <form action="<?= MENU_URL ?>libros/dedicatoria/<?= $book['slug'] ?>/" method="GET">
+                <div class=" col-sm-8 text-center "
+                     style="box-shadow: 0 0 50px rgba(0,0,0,.1); border-radius:40px; padding:30px; background:rgba(255,255,255,1); margin-top:-40px; padding-top:30px">
+
+
+                    <div id="avatar-image">
+                        <div class="image" style="position:relative; overflow:hidden;">
+                            <div id="skin-image"
+                                 style="background-image:url(<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'skin' . DS . $this->skinColors[0]['img_src'] ?>);position:absolute;top:0;left:0;right:0;bottom:0;height:250px;width:250px;background-repeat:no-repeat;background-size:contain; background-position:center center;"></div>
+                            <div id="clothes-image"
+                                 style="background-image:url(<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'clothes' . DS . $this->clothesColor[0]['img_src'] ?>);position:absolute;top:0;left:0;right:0;bottom:0;height:250px;width:250px;background-repeat:no-repeat;background-size:contain; background-position:center center;"></div>
+
+                            <div id="HairStyle-image"
+                                 style="background-image:url(<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'hair' . DS . 'styles'.DS.'style'. $this->hairStyles[0]['style_folder'].DS. $this->hairColors[0]['img_src'] ?>);position:absolute;top:0;left:0;right:0;bottom:0;height:250px;width:250px;background-repeat:no-repeat;background-size:contain; background-position:center center;"></div>
+
+                            <div id="eyes-image"
+                                 style="background-image:url(<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'eyes' . DS . $this->eyesColor[0]['img_src'] ?>);position:absolute;top:0;left:0;right:0;bottom:0;height:250px;width:250px;background-repeat:no-repeat;background-size:contain; background-position:center center;"></div>
+
+                            <div id="glasses-image"
+                                 style="background-image:url(<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'glasses' . DS . $this->eyesColor[0]['img_src'] ?>);position:absolute;top:0;left:0;right:0;bottom:0;height:250px;width:250px;background-repeat:no-repeat;background-size:contain; background-position:center center;"></div>
+                        </div>
+                    </div>
+
+                    <br/>
+
+                    <div class="personalizador-pj" style="margin-bottom:30px;">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#piel">Piel</a></li>
+                            <li><a data-toggle="tab" href="#hair">Pelo</a></li>
+                            <li><a data-toggle="tab" href="#eyes">Ojos</a></li>
+                            <li><a data-toggle="tab" href="#glasses">Gafas</a></li>
+                            <li><a data-toggle="tab" href="#clothes">Ropa</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="piel" class="tab-pane fade in active">
+                                <h3>Piel</h3>
+
+
+                                <div class="hairColors-container row">
+                                    <?php
+                                    $iterator = 0;
+                                    foreach ($this->skinColors as $color) {
+                                        ?>
+
+                                        <div class="visible">
+                                            <div data-type="1" data-gender="0" class="  col-sm-4  col-xs-4 item item-active"
+                                                 data-color="19">
+                                                <div class="selector-item <?= (($iterator == 0) ? 'selector-selected"' : '') ?>"
+                                                     value="<?= $color['id'] ?>" update-id="#skin-image"
+                                                     data-img="<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'skin' . DS . $color['img_src'] ?>">
+                                                    <label for="skinColor_<?= $color['id'] ?>"><?php
+                                                        echo '<img src="' . $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'skin' . DS . 'selector' . DS . $color['img_src'] . '" />';
+                                                        ?></label>
+                                                    <input type="radio" id="skinColor_<?= $color['id'] ?>"
+                                                           name="skinColor"
+                                                           required="required"
+                                                           value="<?= $color['id'] ?>" <?= (($iterator == 0) ? 'checked="checked""' : '') ?> >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                        $iterator++;
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+
+                            <!-- --------------------------- -->
+                            <!-- --------------------------- -->
+                            <!--            HAIRS            -->
+                            <!-- --------------------------- -->
+                            <!-- --------------------------- -->
+                            <div id="hair" class="tab-pane fade ">
+
+                                <div class="row">
+                                    <div class="col-sm-10">
+
+                                        <h3>Estilo</h3>
+                                        <div class="hairStyles-container clearfix ">
+                                            <?php
+                                            $iterator = 0;
+                                            foreach ($this->hairStyles as $color) {
+                                                ?>
+                                                <div class="hairStyles-item  col-sm-4 col-xs-6">
+                                                    <div class="hair-selector-item hair-style <?= (($iterator == 0) ? 'hair-selector-selected"' : '') ?>"
+
+                                                         value="<?= $color['img_src'] ?>"
+                                                         url="<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'hair' . DS ?>styles/"
+                                                         style-id="<?= $color['id'] ?>"
+                                                         style-folder="<?= $color['style_folder'] ?>"
+                                                         update-id="#hairStyle-image"
+                                                         data-img="<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'hair' . DS . 'styles' . DS . $color['img_src'] ?>">
+                                                        <label for="hairStyle_<?= $color['id'] ?>">
+                                                            <?php
+                                                            echo '<img src="' . $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'hair' . DS . 'styles' . DS . $color['img_src'] . '" />';
+                                                            ?>
+                                                        </label>
+                                                        <input type="radio" id="hairStyle_<?= $color['id'] ?>"
+                                                               name="hairStyle" required="required"
+                                                               value="<?= $color['id'] ?>" <?= (($iterator == 0) ? 'checked="checked"' : '') ?>/>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                                $iterator++;
+                                            }
+
+                                            ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <h3>Color</h3>
+
+                                        <div class="hairColors-container row ">
+                                            <?php
+                                            $iterator = 0;
+                                            foreach ($this->hairColors as $color) {
+                                                ?>
+                                                <div class="hairStyles-item  col-sm-12   col-xs-6 no-padding ">
+                                                    <div class="hair-selector-item hair-color <?= (($iterator == 0) ? 'hair-selector-selected"' : '') ?>"
+                                                         value="<?= $color['img_src'] ?>"
+                                                         url="<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'hair' . DS ?>"
+                                                         update-id="#hairColor-image"
+                                                         data-img="<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'hair' . DS . 'colors' . DS . $color['img_src'] ?>">
+                                                        <label for="hairColor_<?= $color['id'] ?>"><?php
+
+                                                            echo '<img src="' . $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'hair' . DS . 'colors' . DS . $color['img_src'] . '" style="max-width: 95%;" />';
+                                                            ?>
+                                                        </label>
+                                                        <input type="radio" id="hairColor_<?= $color['id'] ?>"
+                                                               name="hairColor" required="required"
+                                                               value="<?= $color['id'] ?>" <?= (($iterator == 0) ? 'checked="checked"' : '') ?>/>
+                                                    </div>
+                                                </div>
+                                                <?php
+
+                                                $iterator++;
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <!-- --------------------------- -->
+                            <!-- --------------------------- -->
+                            <!--            EYES            -->
+                            <!-- --------------------------- -->
+                            <!-- --------------------------- -->
+                            <div id="eyes" class="tab-pane fade ">
+
+                                <h3>Color</h3>
+                                <div class="eyesColor-container row">
+                                    <?php
+                                    $iterator = 0;
+                                    foreach ($this->eyesColor as $color) {
+                                        ?>
+
+                                        <div class="visible">
+                                            <div data-type="1" data-gender="0" class="  col-sm-3  col-xs-6 item item-active"
+                                                 data-color="19">
+                                                <div class="selector-item <?= (($iterator == 0) ? 'selector-selected"' : '') ?>"
+                                                     update-id="#eyes-image"
+                                                     data-img="<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'eyes' . DS . $color['img_src'] ?>">
+                                                    <label for="eyesColor_<?= $color['id'] ?>"><?php
+                                                        echo '<img src="' . $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'eyes' . DS . 'selector' . DS . $color['img_src'] . '" />';
+                                                        ?></label>
+                                                    <input type="radio" id="eyesColor_<?= $color['id'] ?>"
+                                                           name="eyesColor"
+                                                           required="required"
+                                                           value="<?= $color['id'] ?>" <?= (($iterator == 0) ? 'checked="checked""' : '') ?>/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                        $iterator++;
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+
+
+                            <!-- --------------------------- -->
+                            <!-- --------------------------- -->
+                            <!--           GLASSES           -->
+                            <!-- --------------------------- -->
+                            <!-- --------------------------- -->
+                            <div id="glasses" class="tab-pane fade ">
+
+                                <h3>Estilo</h3>
+                                <div class="eyesColor-container row">
+                                    <?php
+                                    $iterator = 0;
+                                    foreach ($this->glassesStyle as $color) {
+                                        ?>
+
+                                        <div class="visible">
+                                            <div data-type="1" data-gender="0" class="  col-sm-3   col-xs-6 item item-active"
+                                                 data-color="19">
+                                                <div class="selector-item <?= (($iterator == 0) ? 'selector-selected"' : '') ?>"
+                                                     update-id="#glasses-image"
+                                                     data-img="<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'glasses' . DS . $color['img_src'] ?>">
+                                                    <label for="glassesStyle_<?= $color['id'] ?>"><?php
+                                                        echo '<img src="' . $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'glasses' . DS . 'selector' . DS . $color['img_src'] . '" />';
+                                                        ?></label>
+                                                    <input type="radio" id="glassesStyle_<?= $color['id'] ?>"
+                                                           name="glassesStyle"
+                                                           required="required"
+                                                           value="<?= $color['id'] ?>" <?= (($iterator == 0) ? 'checked="checked""' : '') ?>/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                        $iterator++;
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+
+
+                            <!-- --------------------------- -->
+                            <!-- --------------------------- -->
+                            <!--          CLOTHES            -->
+                            <!-- --------------------------- -->
+                            <!-- --------------------------- -->
+                            <div id="clothes" class="tab-pane fade">
+                                <h3>Ropa</h3>
+                                <div class="clothesColor-container row">
+                                    <?php
+                                    $iterator = 0;
+                                    foreach ($this->clothesColor as $color) {
+                                        ?>
+                                        <div class="clothesColor-item  col-sm-3  col-xs-6">
+                                            <div class="selector-item <?= (($iterator == 0) ? 'selector-selected' : '') ?>"
+                                                 update-id="#clothes-image"
+                                                 data-img="<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'clothes' . DS . $color['img_src'] ?>">
+                                                <img src="<?= $_layoutParams['public_img'] . 'books' . DS . $book['slug'] . DS . 'avatar' . DS . $gender_text . DS . 'clothes' . DS . 'selector' . DS . $color['img_src'] ?>"/>
+                                                <input type="radio" id="clothesColor_<?= $color['id'] ?>"
+                                                       name="clothesColor" required="required"
+                                                       value="<?= $color['id'] ?>" <?= (($iterator == 0) ? 'checked="checked""' : '') ?>/>
+                                                </label>
+                                                <input type="radio" id="clothesColor_<?= $color['id'] ?>"
+                                                       name="clothesColor" required="required"
+                                                       value="<?= $color['id'] ?>" <?= (($iterator == 0) ? 'checked="checked""' : '') ?>/>
+                                            </div>
+                                        </div>
+                                        <?php
+                                        $iterator++;
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- --------------------------- -->
+                    <!-- --------------------------- -->
+                    <!--         BOTON CREAR         -->
+                    <!-- --------------------------- -->
+                    <!-- --------------------------- -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a class="btn btn-outline-orange"  onclick="window.history.back();" style="width:100%;"> <i class="fa fa-angle-left"></i> DATOS DEL NIÑO</a>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-orange" type="SUBMIT" style="width:100%;">PON LA DEDICATORIA <i class="fa fa-angle-right"></i></button>
+                        </div>
+                    </div>
+
+
+
+                    <input type="hidden" name="name" value="<?=@$_GET['name']?>"/>
+                    <input type="hidden" name="gender" value="<?=@$_GET['gender']?>"/>
+            </form>
+        </div>
+        <div class="col-sm-3 col-sm-offset-1">
+            <?php define('STEP_NUMBER',3); include('parts/steps.phtml'); ?>
+        </div>
+    </div>
+
+</div>
+</div>

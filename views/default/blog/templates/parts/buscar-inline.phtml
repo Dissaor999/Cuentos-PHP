@@ -1,0 +1,19 @@
+
+<div class="site-search-area col-sm-12">
+    <form method="GET" id="site-searchform" action="<?= BASE_URL . $this->_lang ?>/blog/">
+        <div class="col-sm-9">
+            <input class="input-text  " style="padding: 10px 20px;
+line-height: 1.4em !important;
+margin-top: 4px;
+border-radius: 38px;
+border: 1px solid white;
+background: rgba(255,255,255,.4);" value="<?= $this->_data['_search'] ?>" name="s" id="s" placeholder="Quieres buscar algo? Escribe aquí!" type="text"/>
+        </div>
+        <div class="col-sm-3">
+            <input id="searchsubmit" value="Buscar" class="btn btn-primary " type="submit"/>
+        </div>
+    </form>
+</div>
+<style>
+    .site-search-area {margin-bottom:20px;}
+</style>

@@ -1,0 +1,294 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title ">
+                Dashboard
+            </h3>
+        </div>
+        <a href="<?= ADMIN_URL.$this->_controlador ?>/add" class=' pull-right btn btn-success'><i class=" fa fa-plus"></i> Crear nueva entrada</a>
+    </div>
+</div>
+
+
+<div class="m-content">
+
+
+            <?php
+                $programa = $this->_data['post']['data'];
+                $categorias = $this->_data['categorias']['data'];
+                $langs = Languages::getLangsDB();
+                $errors = @$this->_errors;
+
+           // print_r($programa);
+
+                if(sizeof(@$errors)>0) {
+                    echo '<div class="alert alert-danger"><ul>';
+                    foreach($errors as $error) {
+                        echo '<li>'.$error.'</li>';
+                    }
+                    echo '</ul></div>';
+                }
+
+                if(@$this->_updated>0) {
+                    echo '<div class="alert alert-success"><p>Se ha actualizado exitosamente.</p></div>';
+                }
+                else if (@$this->_updated==-1) {
+                    echo '<div class="alert alert-warning"><p>No se ha podido actualizar.</p></div>';
+                }
+            ?>
+
+
+
+				<form id="frmNewNew" class="form-vertical form-bordered ajaxform" action="<?= ADMIN_URL.$this->_controlador ?>/editNoticia" method="POST" enctype="multipart/form-data">
+					<input type="hidden" name="d[id]" value="<?= $programa['id'] ?>" />
+					<div class="row">
+						
+						
+						<div class="col-lg-9">
+							
+									
+							<?php
+                            //print_r($langs);
+								foreach($langs as $k => $v) {
+							?>
+                                    <div class="m-portlet">
+
+                                        <div class="m-portlet__head">
+
+                                            <div class="m-portlet__head-caption">
+                                                <div class="m-portlet__head-title">
+                                                    <h3 class="m-portlet__head-text">
+                                                        Datos <?php echo $v['name'].' - '.$v['tagname']; ?>
+                                                    </h3>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="m-portlet__body">
+
+
+                                        <?php
+									$errors = @$this->_errors; 
+									
+									if(sizeof(@$errors)>0) {
+										echo '<div class="alert alert-danger"><ul>';
+										foreach($errors as $error) {
+											echo '<li>'.$error.'</li>';
+										}
+										echo '</ul></div>';
+									}
+									
+									?>
+									<div class="tab-content">
+									
+										<?php	
+										
+											$langid =  strtoupper($v['tagname']);
+											$langidl =  strtolower($v['tagname']);
+												
+												echo '<div class="control-group mt10">
+															<label for="titulo" class="control-label">Título</label>
+															<div class="controls">
+																<input id="titulo" type="text" class="form-control" name="d['.$langidl.'][titulo]" value="'.@$programa['langs'][$langidl]['titulo'].'" required />
+																
+															</div>
+														</div>
+
+														<div class="control-group mt10">
+															<label for="descripcion" class="control-label">Descripción</label>
+															<div class="controls">
+															    <textarea rows="10" class="summernote" cols="80" id="'.$langidl.'-descripcion"  name="d['.$langidl.'][descripcion]" required>'.(@$programa['langs'][$langidl]['descripcion']).'</textarea>
+																
+															</div>
+														</div>
+														<div class="control-group mt10">
+															<label for="descripcion_corta" class="control-label">Descripción corta</label>
+															<div class="controls">
+																<textarea rows="10" class="" cols="80" id="'.$langidl.'-descripcion_corta"  name="d['.$langidl.'][descripcion_corta]" required>'.html_entity_decode(@$programa['langs'][$langidl]['descripcion_corta']).'</textarea>
+																
+															</div>
+														</div>';
+										?>
+		
+										</div>		
+									</div>		
+								</div>		
+							<?php } ?>
+
+                            <div class="m-portlet">
+
+                                <div class="m-portlet__head">
+
+                                    <div class="m-portlet__head-caption">
+                                        <div class="m-portlet__head-title">
+                                            <h3 class="m-portlet__head-text">
+                                                Datos <?php echo $v['name'].' - '.$v['tagname']; ?>
+                                            </h3>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="m-portlet__body">
+
+
+                                <div class="control-group">
+										<label for="slug" class="control-label">Slug</label>
+										<div class="controls">
+											<input id="slug" type="text" class="form-control" name="d[slug]"  value="<?= $programa['slug'] ?>" required />
+											<span class="help-block">
+												El slug es lo que se refleja en la URL.<br />
+												http://dominio.com/noticias/<strong>esto-es-el-slug</strong><br />
+												El slug no puede contener caracteres extraños, mayusculas ni espacios.
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>		
+										
+								
+						</div>
+						<div class="col-lg-3" id="">
+
+
+                            <div class="m-portlet">
+
+                                <div class="m-portlet__head">
+
+                                    <div class="m-portlet__head-caption">
+                                        <div class="m-portlet__head-title">
+                                            <h3 class="m-portlet__head-text">
+                                                Datos de la publicación
+                                            </h3>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="m-portlet__body">
+
+
+                                <div class="row mb20">
+										<div class="col-sm-6">
+											<div class="control-group">
+												<label for="visible" class="control-label">Visible</label>
+												<div class="controls">
+													<input class="switcher" type="checkbox"  <?= (@$programa['publicar']>0) ? 'checked' :''; ?> name="d[visible]">
+												
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="control-group">
+												<label for="destacada" class="control-label">Destacada</label>
+												<div class="controls">
+													<input class="switcher" type="checkbox"  <?= (@$programa['destacada']>0) ? 'checked' :''; ?> name="d[destacada]">
+												
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label for="file" class="control-label">Imagen Grande</label>
+										<div class="controls">
+
+											<div class="fileinput fileinput-new" data-provides="fileinput">
+												<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 300px; height: 150px;">
+													 <img src="<?= $_layoutParams['public_img']  ?>blog/<?= $programa['img_full'] ?>" />
+												</div>
+												<div>
+													<span class="btn btn-default btn-file">
+														<span class="fileinput-new">Seleccionar</span>
+													<span class="fileinput-exists">Cambiar</span>
+													<input type="file" name="imagen">
+													</span>
+													<a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Eliminar</a>
+												</div>
+											</div>
+										</div>
+									</div>		
+									
+									<div class="control-group">
+										<label for="file" class="control-label">Miniatura (612px * 700px)</label>
+										<div class="controls">
+
+											<div class="fileinput fileinput-new" data-provides="fileinput">
+												<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 280px; height: 150px;">
+													 <img src="<?= $_layoutParams['public_img']  ?>blog/thumbs/<?= $programa['img_thumb'] ?>" />
+												</div>
+												<div>
+													<span class="btn btn-default btn-file">
+														<span class="fileinput-new">Seleccionar</span>
+													<span class="fileinput-exists">Cambiar</span>
+													<input type="file" name="miniatura">
+													</span>
+													<a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Eliminar</a>
+												</div>
+											</div>
+											
+										</div>
+									</div>	
+								
+									
+									
+									<div class="control-group">
+										<label for="categd" class="control-label">Categoría</label>
+										<div class="controls">
+											<select id="categd"  type="text" class="form-control" name="d[categorias][]" >
+												<?php foreach($categorias as $categoria) {
+													echo '<option value="'.$categoria['id'].'" '.((in_array($categoria['id'],$programa['cates']))?'selected':'').'>'.$categoria['slug'].' - '.$categoria['langs']['es']['nombre'].'</option>';
+												} 
+												?>
+											</select>
+										</div>
+									</div>
+
+                                    <div class="control-group">
+                                        <label for="fecha" class="control-label">Fecha</label>
+                                        <div class="controls">
+                                            <div class='input-group date' id='m_datetimepicker_6'>
+                                                <input id="fecha" type='text'  name="d[fecha]"  class="form-control m-input" value="<?= (($programa['fecha']!='') ? date('Y-m-d', $programa['fecha']) :  date('Y-m-d', time())) ?>" placeholder="Selecciona la fecha" required />
+                                                <span class="input-group-addon">
+                                                    <i class="la la-calendar glyphicon-th"></i>
+                                                    </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="hora" class="control-label">Hora y Minutos</label>
+                                        <div class="controls">
+                                            <div class='input-group date' id='m_datetimepicker_7'>
+                                                <input type='text' name="d[hora]" class="form-control m-input" value="<?= (($programa['fecha']!='') ? date('H:i', $programa['fecha']) :  date('H:i', time())) ?>" placeholder="Selecciona la hora" />
+                                                <span class="input-group-addon">
+                                                    <i class="la la-clock-o  glyphicon-th"></i>
+                                                </span>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+									
+									<div class="form-actions">
+										<input type="hidden" name="c[id]" value="<?= $programa["id"] ?>" />
+										<button type="submit" class="btn btn-primary">Guardar</button>
+										<a href="<?= ADMIN_URL.$this->_controlador?>" class="btn btn-danger">Cancelar</a>
+									</div>
+								
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</form>
+			</div>
+
+

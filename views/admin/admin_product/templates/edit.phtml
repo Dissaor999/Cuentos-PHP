@@ -1,0 +1,313 @@
+<?php
+
+//THE PRODUCT
+$product = $this->_data['product']['data'][0];
+
+//FILTERS
+$filters = $this->_data['filters']['data'];
+
+$langs = $this->_data['langs'];
+
+
+
+
+
+$errors = @$this->_errors;
+
+if(sizeof(@$errors)>0) {
+    echo '<div class="alert alert-danger"><ul>';
+    foreach($errors as $error) {
+        echo '<li>'.$error.'</li>';
+    }
+    echo '</ul></div>';
+}
+
+if(@$this->_updated>0) {
+    echo '<div class="alert alert-success"><p>Se ha actualizado exitosamente.</p></div>';
+}
+else if (@$this->_updated==-1) {
+    echo '<div class="alert alert-warning"><p>No se ha podido actualizar.</p></div>';
+}
+?>
+
+<div id="page-wrapper">
+
+
+    <?php
+/*
+    echo '<pre>';
+    print_r($product);
+    echo '</pre>';
+*/
+    /*
+    echo '<pre>';
+        print_r($filters);
+    echo '</pre>';
+    */
+    /*
+    echo "<xmp>";
+        print_r(get_defined_vars());
+    echo "</xmp>";
+    */
+
+    ?>
+
+
+
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Dashboard</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="#">Dashboard</a></li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <a href="<?=MENU_URL.$this->_controlador?>/add" class="btn btn-primary">AÑADIR NUEVO PRODUCTO</a>
+                    <a href="<?=MENU_URL .$this->_controlador?>/add_combination/<?=$product['id']?>" class="btn btn-primary">AÑADIR COMBINACION</a>
+                </div>
+            </div>
+        </div>
+
+
+        <form id="frmNewNew" class="form-vertical form-bordered" action="<?= BASE_URL.$this->_controlador ?>/action_edit" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="d[id]" value="<?= $product['id'] ?>" />
+
+            <div class="row tabs tabs-left">
+                <div class="col-sm-3"><a href="#tab-general" data-toggle="tab"> <div class="icon-tab"><i class="fa fa-list"></i> Información General</div></a></div>
+                <div class="col-sm-3"><a href="#tab-combinations" data-toggle="tab"> <div class="icon-tab"><i class="fa fa-plus-square-o"></i> Combinaciones</div></a></div>
+                <div class="col-sm-3"><a href="#tab-images" data-toggle="tab"> <div class="icon-tab"><i class="fa fa-picture-o"></i> Imágenes</div></a></div>
+                <div class="col-sm-3"><button type="submit" class="icon-tab" style="width:100%"><div class=""><i class="fa fa-save"></i> Guardar</div></button></div>
+            </div>
+
+            <div class="row">
+
+
+
+
+
+                <div class="col-lg-9">
+
+
+                    <div class="tab-content">
+
+                        <!-- TAB images -->
+                        <div id="tab-images"  class="tab-pane ">
+                            <div class="white-box" id="tab-images">
+                                <div class="box-title">
+                                    <h3>Imágenes</h3>
+                                </div>
+                                <div class="box-content">
+
+                                    <div class="control-group">
+                                        <label for="file" class="control-label">Miniatura</label>
+                                        <div class="controls">
+                                            <input type="file" name="file" id="input-file-now-custom-1" class="dropify" data-default-file="<?= $_layoutParams['public_img'] ?>products/thumbs/<?=$product['main_img'] ?>" />
+
+
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <style>
+                                        .image-ajax-gallery {
+                                            margin-top: 10px;
+                                            margin-bottom: 10px;
+                                            border: 2px solid #000;
+                                            position:relative;
+                                            background: #333;
+                                            min-height: 30px;
+                                        }
+                                        .image-actions {
+                                            position:absolute;
+                                            top:0;
+                                            left:0:
+                                            right:0;
+                                            width:100%;
+                                            text-align:right;
+                                        }
+                                        .image-actions .remove {
+                                            display: inline-block;
+                                            height: 20px;
+                                            width: 20px;
+                                            background: #f35d5d;
+                                            color: #fff;
+                                            border: 0px;
+                                            margin: 2px 3px;
+                                            text-align:center;
+                                            cursor:pointer;
+                                        }
+                                    </style>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- TAB images -->
+                        <div  id="tab-combinations"  class="tab-pane">
+                            <?php include(__DIR__.'/combination/combinations_table.phtml'); ?>
+                        </div>
+                        <!-- TAB general -->
+                        <div id="tab-general" class="tab-pane active">
+                            <div class="white-box">
+                                <div class="box-title">
+                                    <ul class="tabs tabs-left">
+                                        <?php  foreach($langs as $k => $v) {?>
+                                            <li ><a href="#lang-<?= $v['tagname'] ?>" data-toggle="tab" style="" class="<?= (current($v)==1) ? 'active': ''; ?> <?= current($v); ?>"> <?php echo $v['name'] ?></a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+
+
+                                <div class="box-content">
+                                    <div class="tab-content">
+                                        <?php  foreach($langs as $k => $v) {  ?>
+                                            <div class="tab-pane <?= (current($v)==1) ? 'active': ''; ?>" id="lang-<?=$v['tagname']; ?>">
+                                                <?php
+                                                $errors = @$this->_errors;
+                                                if(sizeof(@$errors)>0) {
+                                                    echo '<div class="alert alert-danger"><ul>';
+                                                    foreach($errors as $error) {
+                                                        echo '<li>'.$error.'</li>';
+                                                    }
+                                                    echo '</ul></div>';
+                                                }
+
+                                                $langid =  strtoupper($v['tagname']);
+                                                $langidl =  strtolower($v['tagname']);
+                                                ?>
+                                                <div class="control-group mt10">
+                                                    <label for="titulo" class="control-label">Título</label>
+                                                    <div class="controls">
+                                                        <input id="titulo" type="text" class="form-control" name="d[<?= $langidl ?>][name]" value="<?= @$product['langs'][$langidl]['name'] ?>" required />
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="control-group">
+                                                    <label for="slug" class="control-label">Slug</label>
+                                                    <div class="controls">
+                                                        <input id="slug" type="text" class="form-control" name="d[<?= $langidl ?>][slug]"  value="<?= @$product['langs'][$langidl]['slug'] ?>" required />
+                                                        <span class="help-block">
+                                                    El slug es lo que se refleja en la URL.<br />
+                                                    http://dominio.com/noticias/<strong>esto-es-el-slug</strong><br />
+                                                    El slug no puede contener caracteres extraños, mayusculas ni espacios.
+                                                </span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+
+                                                        <div class="control-group mt10">
+                                                            <label for="descripcion" class="control-label">Descripción</label>
+                                                            <div class="controls">
+                                                                <textarea rows="10"  style="width:100%;" class="ckeditor" cols="80" id="<?= $langidl ?>-long_desc"  name="d[<?= $langidl ?>][long_desc]"><?= html_entity_decode(@$product['langs'][$langidl]['long_desc'])?></textarea>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="control-group mt10">
+                                                            <label for="descripcion_corta" class="control-label">Descripción corta</label>
+                                                            <div class="controls">
+                                                                <textarea rows="10" class="" cols="80"  style="width:100%" id="<?= $langidl ?>-short_desc"  name="d[<?= $langidl ?>][short_desc]" required><?= html_entity_decode(@$product['langs'][$langidl]['short_desc'])?></textarea>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3" id="sidebar">
+
+
+                    <div class="white-box">
+                        <div class="box-title"><h3>Datos de la publicación</h3></div>
+                        <div class="box-content">
+
+                            <div class="row mb20">
+                                <div class="col-sm-6">
+                                    <div class="control-group">
+                                        <label for="visible" class="control-label">Visible</label>
+                                        <div class="controls">
+                                            <input type="checkbox" id="active" class="js-switch" data-color="#13dafe" name="d[visible]" <?= (($product['visible']>0) ? 'checked' : 'nchecked' )?> />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="control-group">
+                                        <label for="destacada" class="control-label">Destacada</label>
+                                        <div class="controls">
+                                            <input type="checkbox" id="active" class="js-switch" data-color="#13dafe" name="d[featured]" <?= (($product['featured']>0) ? 'checked' : 'nchecked' )?> />
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <?php foreach($filters as $filter) {
+                                    ?>
+                                    <div class="col-sm-12">
+                                        <div class="control-group">
+                                            <label for="<?= $filter['key'] ?>" class="control-label"><?= $filter['name'] ?></label>
+                                            <div class="controls">
+
+                                                <select id="<?= $filter['key'] ?>"  type="text" class="form-control" name="d[<?= $filter['key'] ?>][]" >
+                                                    <?php foreach($filter['values'] as $value) {
+                                                        echo '<option value="'.$value['id'].'" '.((in_array($value['id'],$product['filters']))? 'selected':'').'>'.$value['name'].'</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <?php
+                                }
+                                ?>
+
+
+
+
+                            </div>
+
+
+                            <div class="form-actions">
+                                <input type="hidden" name="c[id]" value="<?= $product["id"] ?>" />
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <a href="<?= BASE_URL.$this->_controlador ?>/lista" class="btn">Cancelar</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    </div>
+    </form>
+
+

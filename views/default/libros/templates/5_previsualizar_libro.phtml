@@ -1,0 +1,138 @@
+<?php
+$book = $this->book;
+
+
+?>
+
+<div class="book-heading"
+     style="padding: 70px 0 160px; background-image: url(<?php echo $_layoutParams['public_img'] ?>books/<?php echo $book['slug'] ?>/heading.jpg);background-position: center; background-size: cover; background-repeat: no-repeat;">
+    <div class="overlay"></div>
+    <div class=" text-center">
+        <h1 class="title-heading" style="color:white"><?php echo $book['name'] ?></h1>
+    </div>
+</div>
+
+<div class="container" style="margin-bottom:200px;">
+    <div class="row">
+
+        <div class="col-sm-9 text-center "
+             style="margin-top:20px; background: rgba(255,255,255,.95); border-radius:40px;padding:30px">
+
+            <div class="book-previsualizador" style=" margin-top:-120px;">
+                <a href="#"  id="prev">&nbsp; </a>
+                <a href="#" id="next"> &nbsp; </a>
+
+                <div id="flipbook" style="max-height:500px;overflow:hidden;" >
+                    <?php
+
+
+                    $i = 0;
+                    foreach ($this->_paginas as $pagina) {
+                        $res = $pagina['res'];
+
+                        $generateArgs=array(
+                            'bs'=>$pagina['book']['slug'],
+                            'o'=>$pagina['res']['orden_pagina'],
+                            'bg'=>$pagina['res']['background_image'],
+                            'n'=>$this->selected_name,
+                            'g'=>$this->gender,
+                            'sc'=>$pagina['pag_skinColor']['id'],
+                            'hs'=>$pagina['pag_hairStyles']['id'],
+                            'hc'=>$pagina['pag_hairColors']['id'],
+                            'ec'=>$pagina['pag_eyesColor']['id'],
+                            'cc'=>$pagina['pag_clothesColor']['id'],
+                            'gs'=>$pagina['pag_glassesStyle']['id'],
+                            'd'=>str_replace("\n", '{{nl}}', @$pagina['dedicatoria']),
+                            'di'=>@$pagina['dedicatoria_img'],
+                        );
+                        $text_args ='';
+
+                        //echo $pagina['dedicatoria'];
+
+
+                        foreach($generateArgs as $key=>$val) $text_args.='&'.$key.'='.$val;
+
+                        echo '
+                            <div class="hard" style="background-image:url('.$_layoutParams['public_img'].'loading.gif);" >
+                                <img 
+                                class="lazy" 
+
+                                style=" transition: all .3s ease-in-out;" 
+                                src="' . MENU_URL . 'libros/generarImagenPagina/?true=1'.$text_args.'" />
+                            </div>';
+                        $i++;
+                    }
+                    ?>
+
+                </div>
+
+
+
+
+
+            </div>
+            <div class="text-right" style="margin-top:10px;">
+                <span>Haz clic y descubre tu historia personalizada </span><img style="transform:rotate(180deg);" src="<?=$_layoutParams['public_img']?>arrow-down-right.png" />
+            </div>
+
+
+
+
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <a class="btn btn-orange-outline" style="width:100%;"  onclick="window.history.back();"> <i class="fa fa-angle-left"></i> DEDICATORIA</a>
+                </div>
+                <div class="col-sm-6">
+                    <form action="<?= MENU_URL ?>libros/formato/<?= $book['slug'] ?>/" method="POST">
+
+                    <button class="btn btn-orange" style="width:100%;">Escoge el formato <i class="fa fa-angle-right"></i></button>
+
+                        <?php
+
+                        $args_parse =array(
+                            'book_slug'=>$pagina['book']['slug'],
+                            'name'=>$this->selected_name,
+                            'gender'=>$_POST['gender'],
+                            'skin_image'=>$pagina['pag_skinColor']['id'],
+                            'hair_style'=>$pagina['pag_hairStyles']['id'],
+                            'hair_image'=>$pagina['pag_hairColors']['id'],
+                            'eyes_image'=>$pagina['pag_eyesColor']['id'],
+                            'clothes_image'=>$pagina['pag_clothesColor']['id'],
+                            'glasses_style'=>$pagina['pag_glassesStyle']['id'],
+                            'dedicatoria'=>@$pagina['dedicatoria'],
+                            'dedicatoria_img'=>@$pagina['dedicatoria_img'],
+                        );
+                        foreach ($args_parse as $k=>$v)
+                            echo '
+                            <input type="hidden" name="'.$k.'" value="'.$v.'" />
+                            ';
+                        ?>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <style>
+           /* #flipbook {
+                margin: 0 auto;
+
+            }*/
+        </style>
+
+
+        <div class="col-sm-3 ">
+            <?php define('STEP_NUMBER', 5);  include('parts/steps.phtml'); ?>
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+<br/>
+<br/>
+<br/>
+<br/>

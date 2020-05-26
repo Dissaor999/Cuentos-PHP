@@ -1,0 +1,84 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title ">
+                Borrar Categoría
+            </h3>
+        </div>
+    </div>
+</div>
+
+
+<div class="m-content">
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="m-portlet">
+
+                <div class="m-portlet__head">
+
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">
+                                Datos
+                            </h3>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+
+
+                    <?php
+
+                    //echo '<pre>';print_r($this);echo '</pre>';
+                    $programa = $this->_data['categoria'][0];
+
+                    $errors = @$this->_errors;
+
+                    if(sizeof(@$errors)>0) {
+                        echo '<div class="alert alert-danger"><ul>';
+                        foreach($errors as $error) {
+                            echo '<li>'.$error.'</li>';
+                        }
+                        echo '</ul></div>';
+                    }
+
+                    ?>
+
+                    <p class="alert alert-danger">
+                        Estas a punto de el siguiente cupón <?= $programa['id'] ?>. ¿Estás seguro?
+                    </p>
+
+                    <div>
+                        <strong>Nombre</strong>
+                        <div><?= $programa['nombre'] ?></div>
+                    </div>
+
+
+                    <br />
+
+
+
+                    <form id="frmDeleteProduction" class="form-horizontal" action="<?= ADMIN_URL.$this->_controlador ?>/delete_categoria" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= $programa['id'] ?>"/>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Borrar</button>
+                            <a href="<?= ADMIN_URL.$this->_controlador ?>" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

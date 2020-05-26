@@ -1,0 +1,124 @@
+
+
+
+<style>
+    .white-box {
+        background:white;
+        padding:20px;
+        margin-bottom:10px;
+    }
+</style>
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title ">
+                Editar Cupón
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+    <form id="frmNewNew" class="form-vertical form-bordered ajaxform" action="<?= ADMIN_URL.$this->_controlador ?>/action_add" method="POST" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    Datos de sesión
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body">
+
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="control-group">
+                                    <label for="username" class="control-label">Nombre</label>
+                                    <div class="controls">
+                                        <input type="text" id="username" class="form-control" name="d[name]" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="control-group">
+                                    <label for="username" class="control-label">Codigo</label>
+                                    <div class="controls">
+                                        <input type="text" id="username" class="form-control" name="d[code]" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="control-group">
+                                    <label for="username" class="control-label">Cantidad en % (del 0 al 100)</label>
+                                    <div class="controls">
+                                        <input type="number" id="username" min="0" max="100" class="form-control" name="d[quantity]" value="<?php echo @$cupon['quantity']?>" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="control-group">
+                                    <label for="username" class="control-label">Fecha Inicio</label>
+                                    <div class="controls">
+                                        <input type="date" id="username" class="form-control" name="d[date_init]" value="<?php echo  date('Y-m-d', time())?>" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="control-group">
+                                    <label for="username" class="control-label">Fecha Fin</label>
+                                    <div class="controls">
+                                        <input type="date" id="username" class="form-control" name="d[date_finish]" value="<?php echo  date('Y-m-d', time())?>" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3" id="">
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    Acciones
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body">
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="<?= ADMIN_URL.$this->_controlador ?>/lista" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</form>
+
+

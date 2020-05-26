@@ -1,0 +1,415 @@
+<div class="page-heading text-center">
+    <h1>Carrito</h1>
+</div>
+<style>
+    select optgroup {
+
+        padding: 2px 5px;
+    }
+    select option{
+         padding: 2px 10px;
+         color:#333;
+     }
+    select option:disabled{
+
+        color:#ccc;
+    }
+</style>
+<div style="background:#fff; padding-bottom:120px;">
+
+    <div class="container">
+
+        <?php
+
+        $compra = true;
+        if(!$compra) {
+          ?>
+            <div class="alert text-center alert-info">
+                <br />
+                <br />  Lo sentimos, actualmente no está disponible la compra.
+                <br />
+                <br />
+                Ponte en contacto con nosotros en info@micuentomagico.com para saber más detalles.
+                <br />
+                <br />
+                ¡Gracias!   <br />
+                <br />
+            </div>
+        <?php
+        }
+        else {
+            $precio_total = 0;
+
+            if (isset($this->_cartItems) && sizeof($this->_cartItems) > 0) { ?>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="form-container">
+
+                        <div class="box">
+
+                            <?php
+                            include('parts/code.phtml');
+                            ?>
+                          <form name="order" method="POST"  action="<?= MENU_URL . $this->_controlador ?>/pagar">
+
+                                <?php
+                                if(isset($this->_cupon)){
+                                    if($this->_cupon!=null) {
+                                        echo '<input type="text" name="order[code]" value="'.$this->_cupon['code'].'">';
+                                    }
+                                }
+                                ?>
+                              <h3>Elige la ONG a la que quieras donar el 20%</h3>
+                                  <div class="row grid-gutter"> <div class="col-xs-12">
+                                      <div class="form-group" style="position: relative;">
+                                          <select  id="donacion_ong" name="order[donacion_ong]"     >
+                                              <option value="Ninguna">Elige ONG</option>
+                                              <option value="Nueva Vida Adopciones">Nueva Vida Adopciones</option>
+                                              <option value="Zarpas y colmillos">Zarpas y colmillos  </option>
+                                              <option value="Asociación ACIMA">Asociación ACIMA  </option>
+                                              <option value="Asociación Diabetes Madrid">Asociación Diabetes Madrid   </option>
+                                              <option value="Asociación Pablo Ugarte">Asociación Pablo Ugarte   </option>
+                                              <option value="Fundación Cadete">Fundación Cadete   </option>
+                                              <option value="Fundación TAMBIEN">Fundación TAMBIEN    </option>
+                                              <option value="Fundación El Alto">Fundación El Alto   </option>
+                                              <option value="Fundación CINDE">Fundación CINDE   </option>
+                                              <option value="Fundación Española del Corazón">Fundación Española del Corazón  </option>
+                                              <option value="Fundación Child Heroes">Child Heroes  </option>
+                                              <option value="Fundación Adsis">Fundación Adsis</option>
+                                              <option value="Fundación Isabel Gemio">Fundación Isabel Gemio </option>
+                                              <option value="Fundación Amigos de las Abejas">Fundación Amigos de las Abejas</option>
+                                              <option value="Fundación Theodora">Fundación Theodora</option>
+                                              <option value="Fundación Pequeño Deseo">Fundación Pequeño Deseo</option>
+                                              <option value="FEDER">FEDER</option>
+                                              <option value="Fundación Amigos de los Mayores">Fundación Amigos de los Mayores</option>
+                                              <option value="ONG: Down Madrid">ONG: Down Madrid   </option>
+                                              <option value="Asociación Infantil Oncológica de Madrid">Asociación Infantil Oncológica de Madrid  </option>
+                                              <option value="other">Otros</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                              </div>
+                            
+
+                                <h2 class="subtitle">Datos del pedido</h2>
+                                <div class="separator"></div>
+
+                                <label>Tus datos</label>
+
+                                <ul class="row grid-gutter">
+                                    <li class="col-lg-6 col-md-6 col-sm-5 col-xs-12">
+                                        <div class="form-group" style="position: relative;"><input type="text"  id="order_name" name="order[name]"    placeholder="Tu nombre *"  required></div>
+                                    </li>
+                                    <li class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
+                                        <div class="form-group"><input type="text" id="order_lastname" name="order[lastname]" placeholder="Tus apellidos *"  required></div>
+                                    </li>
+                                    <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group"><input type="email" id="order_email" name="order[email]"   placeholder="Tu email *" required></div>
+                                    </li>
+                                </ul>
+                                <div class="separator"></div>
+                                <label class="">¿A quién se lo enviamos?</label>
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group" style="position: relative;"><input type="text" id="order_address_name" name="order[address][name]" placeholder="Nombre *" required></div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group"><input type="text" id="order_address_lastname" name="order[address][lastname]" placeholder="Apellidos *" required></div>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group"><input type="text" id="order_address_address" name="order[address][address]" placeholder="Dirección *" required></div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group"><input type="text" id="order_address_zip" name="order[address][zip]" placeholder="Código postal *" required></div>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
+                                        <div class="form-group"><input type="text" id="order_address_city"  name="order[address][city]" placeholder="Localidad  *"  required></div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 clearfix state-container">
+                                        <div class="form-group ">
+                                            <input type="text" id="order_address_state" name="order[address][state]"
+                                                   placeholder="Provincia"  style="display: none;">
+                                            <select id="order_address_state2" name="order[address][state2]"
+                                                    style="display: block;" required>
+                                                <optgroup label="PENÍNSULA">
+                                                    <option value="null">Provincia</option>
+                                                    <option value="1">A Coruña</option>
+                                                    <option value="2">Álava</option>
+                                                    <option value="3">Albacete</option>
+                                                    <option value="4">Alicante</option>
+                                                    <option value="5">Almería</option>
+                                                    <option value="6">Asturias</option>
+                                                    <option value="7">Ávila</option>
+                                                    <option value="8">Badajoz</option>
+                                                    <option value="9">Baleares</option>
+                                                    <option value="10">Barcelona</option>
+                                                    <option value="11">Burgos</option>
+                                                    <option value="12">Cáceres</option>
+                                                    <option value="13">Cádiz</option>
+                                                    <option value="14">Cantabria</option>
+                                                    <option value="15">Castellón</option>
+                                                    <option value="17">Ciudad Real</option>
+                                                    <option value="18">Córdoba</option>
+                                                    <option value="19">Cuenca</option>
+                                                    <option value="20">Girona</option>
+                                                    <option value="21">Granada</option>
+                                                    <option value="22">Guadalajara</option>
+                                                    <option value="23">Guipúzcoa</option>
+                                                    <option value="24">Huelva</option>
+                                                    <option value="25">Huesca</option>
+                                                    <option value="26">Jaén</option>
+                                                    <option value="27">La Rioja</option>
+                                                    <option value="29">León</option>
+                                                    <option value="30">Lleida</option>
+                                                    <option value="31">Lugo</option>
+                                                    <option value="32">Madrid</option>
+                                                    <option value="33">Málaga</option>
+                                                    <option value="35">Murcia</option>
+                                                    <option value="36">Navarra</option>
+                                                    <option value="37">Ourense</option>
+                                                    <option value="38">Palencia</option>
+                                                    <option value="39">Pontevedra</option>
+                                                    <option value="40">Salamanca</option>
+                                                    <option value="42">Segovia</option>
+                                                    <option value="43">Sevilla</option>
+                                                    <option value="44">Soria</option>
+                                                    <option value="45">Tarragona</option>
+                                                    <option value="46">Teruel</option>
+                                                    <option value="47">Toledo</option>
+                                                    <option value="48">Valencia</option>
+                                                    <option value="49">Valladolid</option>
+                                                    <option value="50">Vizcaya</option>
+                                                    <option value="51">Zamora</option>
+                                                    <option value="52">Zaragoza</option>
+                                                </optgroup>
+
+
+                                                <option value="" disabled>------------</option>
+                                                <optgroup label="BALEARES">
+                                                    <option value="41" >Mallorca (CONTACTA CON NOSOTROS)</option>
+                                                    <option value="28" >Menorca (CONTACTA CON NOSOTROS)</option>
+                                                    <option value="28" >Cabrera (CONTACTA CON NOSOTROS)</option>
+                                                    <option value="28" >Ibiza (CONTACTA CON NOSOTROS)</option>
+                                                    <option value="28" >Formentera (CONTACTA CON NOSOTROS)</option>
+                                                </optgroup>
+
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                        <div class="form-group"><input type="hidden" id="order_address_dialCode"  name="order[address][dialCode]" placeholder="Prefijo  *" value="+34" ></div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group"><input type="text" id="order_address_phone" name="order[address][phone]"
+                                                                       placeholder="Móvil (para temas de entrega)  *" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row ">
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div style="text-align: right;" class="link link-instructions">Otras instrucciones  de entrega
+                                        </div>
+                                        <div class="instructions-container">
+                                            <div class="form-group"><textarea id="order_deliveryInstructions" name="order[deliveryInstructions]"  placeholder="Otras instrucciones de entrega"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="separator"></div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <label class="required">Forma de pago</label>
+                                    <div class="method active">
+                                        <span>Tarjeta</span>
+                                        <div class="icons">
+                                            <img src="<?= $_layoutParams['public_img'] ?>cart/metodos_pago/mastercard.png">
+                                            <img src="<?= $_layoutParams['public_img'] ?>cart/metodos_pago/visa-electron.png">
+                                            <img src="<?= $_layoutParams['public_img'] ?>cart/metodos_pago/visa-straight.png">
+                                            <img src="<?= $_layoutParams['public_img'] ?>cart/metodos_pago/american-express.png">
+                                        </div>
+                                        <div class="text">Serás redireccionado a la plataforma de pago seguro de nuestro banco</div>
+                                        <input type="radio" id="order_method_0" name="order[method]" required value="tpv" checked="checked">
+                                    </div>
+                                    <div class="method ">
+                                        <span>PayPal</span>
+                                        <div class="icons">
+                                            <img src="<?= $_layoutParams['public_img'] ?>cart/metodos_pago/paypal.png">
+                                        </div>
+                                        <div class="text">Serás redireccionado a la plataforma de pago seguro de Paypal</div>
+                                        <input type="radio" id="order_method_1" name="order[method]"  value="paypal">
+                                    </div>
+                                    <div class="method">
+                                        <span>Transferencia Bancaria</span>
+                                        <div class="icons">
+                                            <img src="<?= $_layoutParams['public_img'] ?>cart/metodos_pago/pagos-transferencia.png">
+                                        </div>
+                                        <div class="text">Te falicitaremos un número de pedido y una cantidad para que hagas el ingreso.</div>
+                                        <input type="radio" id="order_method_2" name="order[method]"  value="transfer">
+                                    </div>
+
+
+                                </div>
+                                <hr />
+                                <div class="row ">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <input type="checkbox" name="bases" style="width:auto;display:inline-block;" required/> <label>Acepto las <a href="<?=MENU_URL?>terminos-y-condiciones">Bases Legales</a></label>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-orange btn-full" style="width:100%;" value="ENVIAR">
+                                PROCEDER AL PAGO
+                            </button>
+
+
+                        </form>
+                    </div>
+                </div>
+
+                <!-- SIDEBAR INFO -->
+                <div class="col-sm-4">
+                    <?php
+                    foreach ($this->_cartItems as $cart_item) {
+
+                        //echo '<pre>';  print_R($cart_item); echo '</pre>';
+                        ?>
+                        <div class="libro-cart" style="padding:0px;">
+                            <a href="<?= MENU_URL ?>cart/removeItem/?item=<?= $cart_item['id-object'] ?>" class="removecartitem-compra" style="display:inline-block;">Eliminar <i class="fa fa-trash"></i></a>
+                            <div class="row ">
+
+                                <div class="col-lg-4 col-md-4 col-md-offset-0 col-sm-6 col-xs-offset-6 col-xs-offset-3 text-center">
+                                    <img style="margin-top:0px;width:200px;" src="<?= BASE_URL ?>libros/generateAvatar/?<?=
+                                    'book_slug=' . @$cart_item['book']['slug'] .
+                                    '&gender=' . @$cart_item['custom_avatar']['gender'] .
+                                    '&glassesStyle=' . $cart_item['custom_avatar']['glassesStyle'] .
+                                    '&skinColor=' . $cart_item['custom_avatar']['skinColor'] .
+                                    '&hairStyle=' . @$cart_item['custom_avatar']['hairStyle'] .
+                                    '&hairColor=' . @$cart_item['custom_avatar']['hairColor'] .
+                                    '&eyesColor=' . @$cart_item['custom_avatar']['eyesColor'] .
+                                    '&clothesColor=' . @$cart_item['custom_avatar']['clothesColor']
+                                    ?>"/>
+                                </div>
+
+                                <div class="col-md-8 col-sm-12 col-xs-12 text-left">
+                                    <div class="datos-book-name"><?= $cart_item['book']['name'] ?></div>
+                                    <div><label>Prota:</label> <span
+                                                class="avatar_name_cart"><?= $cart_item['custom_avatar']['name'] ?></span>
+                                    </div>
+                                    <span class="book_price_datos"><?=$cart_item['book']['formatos'][$cart_item['formato']]['nombre']?> - <?=$cart_item['book']['formatos'][$cart_item['formato']]['precio']?>€</span>
+                                </div>
+                            </div>
+                            <hr style="margin-top:0px;" class="  hidden"/>
+                            <div class="row  hidden">
+                                <div class="col-sm-10 col-sm-offset-1">
+                                    <div><label>Dedicatoria:</label> <span
+                                                class="dedicatoria_cart"><?= $cart_item['dedicatoria']['text'] ?></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <?php
+
+                        $precio_total += $cart_item['book']['formatos'][$cart_item['formato']]['precio'];
+                    }
+
+                    ?>
+
+
+                    <div class="clearfix"  style="padding-top:0px; margin-bottom:5px; padding-bottom:0px; border-bottom:1px solid #888;">
+                        <div class="col-sm-6"><strong style="color:#333; font-size:19px; l">Envío</strong>
+                        </div>
+                        <div class="col-sm-6 text-center">
+                            <div style="color:#f1b577; font-size:25px;" class="checkout subtotal">
+                                <div class="price" style="display:inline-block"><?= ((GTS_ENVIO==0)?'GRATIS':GTS_ENVIO.' €') ?></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"
+                         style="padding-top:0px; margin-bottom:5px; padding-bottom:0px; border-bottom:1px solid #888;">
+                        <div class="col-sm-6"><strong style="color:#333; font-size:23px ;">Total</strong>
+                        </div>
+                        <div class="col-sm-6 text-center">
+                            <div style="color:#f1b577; font-size:25px;" class="checkout subtotal">
+                                <div class="price text-center" style="display:inline-block"><?php
+                                    $precio_total+GTS_ENVIO;
+
+                                     if(isset($this->_cupon)) echo $precio_total - ($precio_total*$this->_cupon['quantity']/100 );
+                                    else echo $precio_total;
+                                    ?></div>
+                                €
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <br />
+                    <br />
+
+                    <div class="box order-phone">
+                        <h2 class="subtitle">¿Tienes alguna pregunta?</h2>
+                        <div class="separator"></div>
+                        <div class="icon icon-phone">675 739 638</div>
+                    </div>
+
+
+                    <div class="box order-paymethods text-center">
+                        <h2 class="subtitle">Métodos de pago</h2>
+                        <div class="separator"></div>
+
+                        <img src="<?= $_layoutParams['public_img'] ?>cart/sabadell.png" style="height:40px;">
+                        <br >
+                        <br >
+                        <img src="<?= $_layoutParams['public_img'] ?>cart/metodos_pago/mastercard.png">
+                        <img src="<?= $_layoutParams['public_img'] ?>cart/metodos_pago/visa-electron.png">
+                        <img src="<?= $_layoutParams['public_img'] ?>cart/metodos_pago/visa-straight.png">
+                        <img src="<?= $_layoutParams['public_img'] ?>cart/metodos_pago/american-express.png">
+                        <br >
+                        <br >
+                        <img src="<?= $_layoutParams['public_img'] ?>cart/transfer.png" style="height:80px;">
+                        <br >
+                        <br >
+                        <img src="<?= $_layoutParams['public_img'] ?>cart/paypal.png" style="height:40px;">
+                        <br >
+                        <br >
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+        <?php
+        } else {
+            ?>
+            <div class="text-center">
+                <h1>Oops!</h1>
+                <h3>¡No has añadido cuentos a la cesta!</h3>
+                <br/>
+                <br/>
+                <a class="btn btn-orange" href="<?= MENU_URL ?>libros">VER TODOS LOS CUENTOS</a>
+                <br/>
+                <br/>
+            </div>
+            <?php
+        }
+    }
+    ?>
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+</div>

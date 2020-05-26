@@ -1,0 +1,117 @@
+<?php 
+	$news = $this->_data['users'];
+?>
+
+
+<style>
+    .white-box {
+        background:white;
+        padding:20px;
+        margin-bottom:10px;
+    }
+</style>
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title ">
+                Editar
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+
+<?php
+        if($news['error']>0) {
+            echo ' <div class="row-fluid">
+                        <div class="col-lg-12">
+                            <div class="box box-color alert alert-danger">
+                                <h3>Error!</h3>';
+            echo (isset($news['msg']) && $news['msg']=!'') ? 'Error: '.$news['msg'] : 'Unknown error.';
+            echo '	</div>
+                        </div>
+                    </div>';
+
+        }
+        if(!isset($news['data']) || sizeof($news['data'])==0) {
+            echo ' <div class="row-fluid">
+                        <div class="col-lg-12">
+                            <div class="box box-color alert alert-warning">
+                                <h3>No hay datos.</h3>';
+            echo '	</div>
+                        </div>
+                    </div>';
+
+        }
+
+        ?>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+
+
+                    <a href="<?= ADMIN_URL.$this->_controlador ?>/add" class="btn btn-primary">AÑADIR USUARIO</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+								
+                                <table class="table table-hover table-nomargin dataTable table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th width="50">ID</th>
+
+                                        <th  width="170">user</th>
+                                        <th  width="170">Nombre</th>
+                                        <th  width="170">Email</th>
+
+                                        <th width="70">Verificado</th>
+
+                                        <th width="60">Estado</th>
+                                        <th width="60">Newsletter</th>
+
+                                        <th width="60">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    //echo '<pre>';print_r($this->_data['data']['projects']);echo '</pre>';
+                                    if(isset($news['data']) &&  sizeof($news['data'])>0)
+                                    foreach($news['data'] as $k => $row) {?>
+                                        <tr>
+                                            <td><?= $row['id'] ?></td>
+
+                                            <td><?= $row['login'] ?></td>
+                                            <td><?= $row['first_name'] ?> <?= $row['last_name'] ?></td>
+
+                                            <td><?= $row['email'] ?></td>
+                                            <td class="text-center"><?= (($row['active']==1)? '<i class="fa fa-check" style="color:green"></i>' : '<i class="fa fa-ban" style="color:red"></i>' ) ?></td>
+                                            <td class="text-center"><?= (($row['banned']==0)? '<i class="fa fa-check" style="color:green"></i>' : '<i class="fa fa-ban" style="color:red"></i>' ) ?></td>
+                                            <td class="text-center"><?= (($row['newsletter']==0)? '<i class="fa fa-newspaper-o-slash" style="color:red"></i>' : '<i class="fa fa-newspaper-o  " style="color:green"></i>' ) ?></td>
+
+
+
+                                            <td>
+                                                <a href="<?= ADMIN_URL.$this->_controlador ?>/edit/<?= $row['id'] ?>" title="Modificar" class="btn btn-xs btn-warning">&nbsp;<i class="icon fa fa-pencil">&nbsp;</i></a>
+                                                <a href="<?= ADMIN_URL.$this->_controlador ?>/delete/<?= $row['id'] ?>" title="Borrar" class="btn btn-xs btn-danger">&nbsp;<i class="icon fa fa-trash-o">&nbsp;</i></a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+
+
+                                </tbody>
+                            </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

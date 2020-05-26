@@ -1,0 +1,81 @@
+<div class="index-header">
+	<hgroup class="article__headline">
+		<h2 class="headline__secondary" ><span class="first-letter">Pedidos</h2>
+
+	</hgroup>					
+</div>
+
+
+<div style="background: #f9f9f9;">
+
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+                   <div class="text-center"> <h2>Listado de pedidos</h2></div>
+                    <br />
+                    <br />
+                    <table class=" text-center table table-hover table-nomargin dataTable table-bordered">
+                        <thead>
+                        <tr>
+                            <th width="50" class="text-center">ID</th>
+
+                            <th width="170"  class="text-center">Fecha</th>
+                            <th  width="170"  class="text-center">Productos</th>
+                            <th  width="170"  class="text-center">Total </th>
+                            <th  width="50"  class="text-center">Estado</th>
+
+
+                            <th width="60"  class="text-center">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+
+                        $orders = $this->_data['orders'];
+
+                        //echo '<pre>';print_r($this->_data['data']['projects']);echo '</pre>';
+                        if(isset($orders['data']) &&  sizeof($orders['data'])>0)
+                            foreach($orders['data'] as $k => $row) {
+                                $total=0;
+                                foreach($row['datas'] as $product) $total = $product['price']*$product['quantity'];
+                                $products= sizeof($row['datas']);
+
+                                ?>
+                                <tr>
+                                    <td class="text-center"><?= $row['id'] ?></td>
+                                    <td  class="text-center"><?= date('d/m/Y H:i:s', (!empty($row['date'])) ? $row['date'] : time());?></td>
+
+
+                                    <td  class="text-center"><?= $products ?></td>
+                                    <td  class="text-center"><?= $total ?> €</td>
+
+
+                                    <td  class="text-center"><?= $row['status_name'] ?> </td>
+
+
+
+
+                                    <td  class="text-center">
+                                        <a href="<?= MENU_URL.$this->_controlador ?>/orders/<?= $row['id'] ?>" title="Modificar" class="btn btn-xs btn-success">&nbsp;<i class="icon fa fa-eye"></i> VER</a>
+
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        ?>
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+<br />

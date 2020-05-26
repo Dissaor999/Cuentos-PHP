@@ -1,0 +1,98 @@
+<?php
+$book = $this->book;
+
+
+$gender_text = '';
+
+switch ($_GET['gender']) {
+    case '1':
+        $gender_text = 'male';
+        break;
+    case '2':
+        $gender_text = 'female';
+        break;
+
+}
+
+?>
+
+<div class="book-heading"
+     style="padding: 70px 0 160px; background-image: url(<?php echo $_layoutParams['public_img'] ?>books/<?php echo $book['slug'] ?>/heading.jpg);background-position: center; background-size: cover; background-repeat: no-repeat;">
+    <div class="overlay"></div>
+    <div class=" text-center">
+        <h1 class="title-heading" style="color:white"><?php echo $book['name'] ?></h1>
+    </div>
+</div>
+
+
+<div style="padding-bottom:160px;">
+    <div class=" container">
+        <div class="row">
+            <form action="<?= MENU_URL ?>libros/previsualizar/<?= $book['slug'] ?>/" enctype="multipart/form-data" method="POST">
+                <div class=" col-sm-8 text-center "
+                     style="box-shadow: 0 0 50px rgba(0,0,0,.1); border-radius:40px; padding:30px; background:rgba(255,255,255,1); margin-top:-40px; padding-top:30px">
+
+
+                    <div id="avatar-image">
+                        <div id="toPrint" class="image" style='position:relative; overflow:hidden; background-image: url("<?=$_layoutParams['public_img']?>dummy-kid.jpg")'></div>
+                        <!-- <a href="#" class="upload-result">Result</a> -->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <label class="btn btn-orange" for="upload" style="width:100%;">SUBIR IMAGEN <i class="glyphicon glyphicon-picture"></i></label>
+                            <input type="file" id="upload" accept="image/*"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <textarea style="padding:22px;" name="dedicatoria" rows="5" maxlength="250" placeholder="Escribe tu dedicatoria"><?php switch($_GET['gender']) {case '1':echo'Querido';break;case 2: echo 'Querida';break;} ?> <?= $_GET['name'] ?>.
+
+Este es un cuento mágico y maravilloso como tú. Esperamos que disfrutes de las increíbles aventuras que hay en él y nunca dejes de creer en la magia.
+
+¡Te queremos mucho!</textarea>
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+
+                    <!-- --------------------------- -->
+                    <!-- --------------------------- -->
+                    <!--         BOTON CREAR         -->
+                    <!-- --------------------------- -->
+                    <!-- --------------------------- -->
+                        <div class="col-sm-6">
+                            <a class="btn btn-outline-orange" style="width:100%;"  onclick="window.history.back();"> <i class="fa fa-angle-left"></i> TU PERSONAJE</a>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-orange" type="SUBMIT" style="width:100%;">PREVISUALIZAR CUENTO <i class="fa fa-angle-right"></i></button>
+                        </div>
+                    </div>
+
+
+                    <input type="hidden" name="skinColor" value="<?=@$_GET['skinColor']?>"/>
+                    <input type="hidden" name="hairStyle" value="<?=@$_GET['hairStyle']?>"/>
+                    <input type="hidden" name="hairColor" value="<?=@$_GET['hairColor']?>"/>
+                    <input type="hidden" name="eyesColor" value="<?=@$_GET['eyesColor']?>"/>
+                    <input type="hidden" name="glassesStyle" value="<?=@$_GET['glassesStyle']?>"/>
+                    <input type="hidden" name="clothesColor" value="<?=@$_GET['clothesColor']?>"/>
+                    <input type="hidden" name="name" value="<?=@$_GET['name']?>"/>
+                    <input type="hidden" name="gender" value="<?=@$_GET['gender']?>"/>
+                    <input type="hidden" name="imgDedicatoria"/>
+            </form>
+
+            <div class="col-sm-3 col-sm-offset-1">
+                <?php define('STEP_NUMBER',4); include('parts/steps.phtml'); ?>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<br/>
+<br/>
+<br/>
+<br/>

@@ -1,0 +1,7 @@
+.idea/
+.htaccess
+tmp_img/*
+pma
+app/*
+app/Config.php
+public/img/dedicatoria_img

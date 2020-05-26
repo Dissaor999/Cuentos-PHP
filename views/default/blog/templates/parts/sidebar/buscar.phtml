@@ -1,0 +1,21 @@
+<div class="sw_search">
+    <div class="sw_title">
+        <h4>BUSCAR</h4>
+        <div class="brb"></div>
+    </div>
+    <div class="site-search-area">
+        <form method="GET" id="site-searchform"
+              action="<?= BASE_URL . $this->_lang ?>/blog/">
+            <div>
+                <input class="input-text" name="s" id="s" placeholder="Escribe.."
+                       type="text"/>
+                <input id="searchsubmit" class="btn-orange" value="Search" type="submit"/>
+            </div>
+        </form>
+    </div>
+    <!-- end site search -->
+</div>
+
+<style>
+    .btn-orange {background:orange; color:white;border:none;}
+</style>

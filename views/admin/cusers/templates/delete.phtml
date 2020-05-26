@@ -1,0 +1,64 @@
+
+<style>
+    .white-box {
+        background:white;
+        padding:20px;
+        margin-bottom:10px;
+    }
+</style>
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title ">
+                Eliminar Usuario
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+
+
+                    <?php
+
+
+                    $programa = $this->_data['product']['data'][0];
+                    $langs = $this->_data['langs'];
+                   // echo '<pre>';print_r($programa);echo '</pre>';
+                    $errors = @$this->_errors;
+
+                    if(sizeof(@$errors)>0) {
+                        echo '<div class="alert alert-danger"><ul>';
+                        foreach($errors as $error) {
+                            echo '<li>'.$error.'</li>';
+                        }
+                        echo '</ul></div>';
+                    }
+
+                    ?>
+
+                    <p class="alert alert-danger">
+                        Estas a punto de borrar el usuario <?= $programa['id'] ?> - <?= $programa['email'] ?>. ¿Estás seguro?
+                    </p>
+
+
+
+                    <form id="frmDeleteProduction" class="form-horizontal" action="<?= ADMIN_URL.$this->_controlador ?>/action_delete" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= $programa['id'] ?>"/>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Borrar</button>
+                            <a href="<?= ADMIN_URL.$this->_controlador ?>" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+

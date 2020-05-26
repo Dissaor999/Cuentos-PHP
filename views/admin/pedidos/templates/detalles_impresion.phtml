@@ -1,0 +1,180 @@
+
+<style>
+    .white-box {
+        background:white;
+        padding:20px;
+        margin-bottom:10px;
+    }
+</style>
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title ">
+                Impresion de pedidos
+            </h3>
+        </div>
+    </div>
+</div>
+
+
+<div class="m-content">
+
+    <?php
+    //THE PRODUCT
+
+
+    $product = $this->_orders;
+
+    $errors = @$this->_errors;
+
+    if(sizeof(@$errors)>0) {
+        echo '<div class="alert alert-danger"><ul>';
+        foreach($errors as $error) {
+            echo '<li>'.$error.'</li>';
+        }
+        echo '</ul></div>';
+    }
+
+    $impresiones_pendientes=0;
+
+    foreach($this->_orders as $order) $impresiones_pendientes+=sizeof($order['books']);
+
+    ?>
+
+
+
+
+            <div class="row" style="margin-bottom:30px;">
+                <div class="col-lg-12">
+                    <div class="row text-center">
+                        <div class="col-lg-6">
+                            <div class="white-box">
+                                <div class="box-title">
+                                    <h3>PEDIDOS PENDIENTES<br /><strong><?=sizeof($this->_orders)?></strong></h3>
+                                </div>
+
+                            </div>
+                        </div>
+                       <div class="col-lg-6">
+                            <div class="white-box">
+                                <div class="box-title">
+                                    <h3>IMPRESIONES PENDIENTES<br /><strong>#<?=$impresiones_pendientes?></strong></h3>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="btn-box btn btn-primary btn-xl" id="enviarImpresion" style="display:block; font-size:26px; letter-spacing:2px; width:100%; text-align:center;">
+                ENVIAR A IMPRENTA LOS SELECCIONADOS
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom:30px;">
+        <div class="col-lg-12">
+            <div class="row text-left">
+                <div class="col-lg-12">
+                    <div class="white-box">
+                        <h1>Resultados:</h1>
+                             <ul id="results"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="m-portlet">
+
+                <div class="m-portlet__head">
+
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">
+                                Orders
+                            </h3>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+
+                    <table class=" text-center table table-hover table-nomargin dataTable table-bordered">
+
+
+                        <thead>
+                        <tr>
+
+                            <th width="50" class="text-center">SELECT</th>
+                            <th width="50" class="text-center">ID</th>
+
+                            <th width="70"  class="text-center">Fecha</th>
+                            <th  width="170"  class="text-center">Usuario</th>
+                            <th  width="60"  class="text-center">Cuentos</th>
+                            <th  width="80"  class="text-center">Total </th>
+
+                            <th  width="60"  class="text-center">Coupon Code </th>
+                            <th  width="60"  class="text-center">M. Pago </th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+
+                        //echo '<pre>';print_r($product);echo '</pre>';
+
+                        if(isset($product) &&  sizeof($product)>0)
+                            foreach($product as $k => $row) {
+                                //echo '<pre>';print_r($row);echo '</pre>';
+                                $total=0;
+                                foreach($row['books'] as $product) $total += $product['format_price'];
+                                $products= sizeof($row['books']);
+
+                                ?>
+                                <tr>
+                                    <td class="text-center"><input type="checkbox" class="check_pedido" checked value="<?= $row['id'] ?>" /></td>
+                                    <td class="text-center"><?= $row['id'] ?></td>
+                                    <td><?= date('d/m/Y H:i:s', (!empty($row['date_add'])) ? $row['date_add'] : time());?></td>
+
+                                    <td><?= $row['email'] ?> - <?= $row['name'] ?> <?= $row['surnames'] ?></td>
+
+                                    <td><?= $products ?></td>
+                                    <td><?= (($row['discount_quantity']!='') ? '<del>'.$total.'</del>€<br />'.($total-($total*$row['discount_quantity']/100)) : $total) ?> €</td>
+                                    <td><?= $row['discount_name'] ?> <br /> <?= (($row['discount_quantity']!='') ? $row['discount_quantity'].'%' : '') ?></td>
+                                    <td><?= $row['metodo_pago'] ?></td>
+
+
+
+                                </tr>
+                                <?php
+                            }
+                        ?>
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+

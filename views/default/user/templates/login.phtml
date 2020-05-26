@@ -1,0 +1,76 @@
+<div class="index-header">
+    <hgroup class="article__headline">
+        <h2 class="headline__secondary" ><span class="first-letter">Inicia Sesión</h2>
+    </hgroup>
+</div>
+
+<div style="background:#f9f9f9;">
+    <div class="container" style=">
+    <!-- start section filter -->
+   <div class="row">
+
+    <div class="col-sm-7 col-sm-offset-3" style="
+    box-shadow: 0 0 10px rgba(0,0,0,.2); background:#fff; border-radius:30px;padding:30px;color:#333;margin-top:80px;margin-bottom:80px;">
+
+        <h1 class="login-box-msg text-center" style="margin: 10px 0;">ACCESO PROFESIONALES</h1>
+        <hr>
+
+        <form method="POST"   action="<?= BASE_URL ?>user/makeLogin" accept-charset="UTF-8" role="form" class="login-form">
+
+            <div class="form-group has-feedback">
+                <input placeholder="Nombre de usuario" class=" unfield" name="username" type="text">
+                <span class="fa fa-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input placeholder="Contraseña" class="unfield " name="password" type="password" value="">
+                <span class="fa fa-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="checkbox icheck">
+                        <label style="padding-left:0px;">
+                            <input name="remember" type="checkbox" value="1" style="margin:0;float:none;position:relative;"> No cerrar sesión
+                        </label>
+                        <br />
+                        <br />
+                        <a href="<?= MENU_URL ?>user/forget" id="" class=" remember ">¿Has olvidado tu contraseña?</a><br><br>
+                    </div>
+                </div><!-- /.col -->
+                <div class="col-sm-4">
+                    <button id="btn_submit" type="submit" class="btn btn-primary btn-block btn-flat">Acceder</button>
+
+                    <a href="<?= MENU_URL ?>user/register" id="btn_register" class="btn btn-success btn-xl">Registrarse</a><br>
+                </div><!-- /.col -->
+            </div>
+        </form>
+        <?php if(isset($_GET['error'])) {
+            ?>
+            <div class="row">
+                <div class="alert alert-danger col-sm-12">
+                    <?php
+                    switch($_GET['error']){
+                        case 1:
+                            echo 'El usuario o la contraseña no coinciden.';
+                            break;
+                        case 2:
+                            echo 'El usuario no está activo.';
+                            break;
+                        case 3:
+                            echo 'El usuario ha sido baneado.';
+                            break;
+                        default:
+                            echo 'El usuario o la contraseña no coinciden.';
+                            break;
+                    }
+                    ?>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
+
+    </div>
+
+</div> <!-- end row -->
+</div> <!-- end container -->
+</div> <!-- end container -->

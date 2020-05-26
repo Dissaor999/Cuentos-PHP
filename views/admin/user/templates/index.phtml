@@ -1,0 +1,155 @@
+<div class="index-header">
+	<hgroup class="article__headline">
+		<h2 class="headline__secondary" ><span class="first-letter">Datos usuario</h2>
+
+	</hgroup>					
+</div>
+
+<div style="background: #f9f9f9;">
+    <style>
+        .index-header {text-align:center; padding:100px 0; background:url(http://luesmavega.eu/wp-content/uploads/2014/06/cabecera-2048x1365.jpg);}
+        .mb20 {margin-bottom:20px;}
+        select {background:#eee;color:#999;border:none;font-weight:bold;border-radius:0px;}
+
+        .user-data .row div[class*='col-']{margin-bottom:20px}
+        .user-data input:hover,
+        .user-data input:focus{
+            outline: none;
+            border-bottom-color: #888;
+        }
+        .user-data input{
+            background: none;
+            border-radius: 0;
+            border: none;
+            border: 1px solid #ccc !important;
+            color: #999 !important;
+            font-weight: 400 !important;
+        }
+
+        .user-data .submit {
+            background:#222;
+            color:#fff;
+            border-radius:4px;
+            padding: 4px 15px;
+            font-weight: 100;
+            text-transform:uppercase;
+            letter-spacing 1.1em;
+            font-size:20px;
+        }
+
+        .igr {position:relative;}
+        .igra {
+            position: absolute;
+            right: 4%;
+            top: 12%;
+            color:#ddd;
+        }
+        .user-data input:focus ~ .igra {color:#333;}
+    </style>
+    <br />
+    <div class="container">
+        <div style=" box-shadow: 0 0 10px rgba(0,0,0,.2); background:#fff; border-radius:30px;padding:30px;color:#333;margin-top:80px;margin-bottom:80px;">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Datos de usuario</h2>
+        </div>
+    </div>
+
+    <form class="user-data" action="<?=BASE_URL?>user/updateData" method="POST">
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-pencil"></i></span>
+                    <input type="text" class="" value="<?= CUser::getName() ?>" />
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-pencil"></i></span>
+                    <input type="text" class="" value="<?= CUser::getSurnames() ?>" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-pencil"></i></span>
+                    <input type="text" class="" value="<?= CUser::getEmail() ?>" />
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-pencil"></i></span>
+                    <input type="text" class="" value="<?= CUser::getGender() ?>" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-pencil"></i></span>
+                    <input type="text" class="" value="<?= CUser::getMobile() ?>" />
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-pencil"></i></span>
+                    <input type="text" class="" value="<?= CUser::getPhone() ?>" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Facturación y envío</h2>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-pencil"></i></span>
+                    <input type="text" class="" value="<?= @CUser::getFacLoc() ?>" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-pencil"></i></span>
+                    <input type="text" class="" value="<?= @CUser::getAddr() ?>" />
+                </div>
+            </div>
+        </div>
+
+
+        <br />
+        <br />
+
+            <div class="row">
+
+            <div class="col-sm-12  text-right">
+                <input type="submit" class="submit pull-right" value="ACTUALIZAR DATOS"  style="    padding: 10px 40px;
+    color: white !important;
+    letter-spacing: 3px;
+    font-weight: 600 !important;
+    font-family: Montserrat;">
+            </div>
+        </div>
+    </form>
+
+</div>
+</div>
+</div>
+
+<br />
+<br />
+<br />

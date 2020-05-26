@@ -1,0 +1,26 @@
+<div class="row" style="  padding-top:10px;  padding-bottom:10px;">
+    <div class="col-sm-12 col-xs-12 text-center">
+
+            <h2 class="subtitle" style="margin-top:0px;">Código de descuento</h2>
+            <hr />
+
+            <?php
+    if(isset($this->_cupon)){
+        if($this->_cupon==null) echo '<div class="alert alert-danger">Ha habido un error al poner el código</div>';
+        else {
+            echo '<div style="margin-top:10px; font-size:26px; color:orange;">['.$this->_cupon['code'].'] -  '.$this->_cupon['quantity'].'%</div>';
+
+        }
+    }else {
+        ?>
+        <form name="order" method="POST"  action="<?= MENU_URL . $this->_controlador ?>/datos/">
+            <input type="text" name="cupon" placeholder="CÓDIGO DEL CUPÓN">
+            <button class="btn btn-orange">APLICAR</button>
+        </form>
+        <?php
+    }
+    ?>
+
+
+    </div>
+</div>

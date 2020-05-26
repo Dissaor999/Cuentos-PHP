@@ -1,0 +1,87 @@
+<div class="index-header">
+	<hgroup class="article__headline">
+		<h2 class="headline__secondary" ><span class="first-letter">Nuestra tienda para</h2>
+		<h1 class="headline__primary" >Profesionales</h1>
+	</hgroup>					
+</div>
+
+<?php
+    $product = $this->_data['product']['data'][0];
+
+?>
+
+<div class="container">
+    <br />
+    <br />
+    <div class="row">
+
+        <div class="col-sm-6">
+            <h1 class="product__title" style="font-size:37px; letter-spacing:inherit;"><?= $product['name']?></h1>
+            <div class=" text-center product-main-img">
+                <?php
+                    if($product['main_img']!='') {
+                        ?> <img src="<?= $_layoutParams['public_img'].'products/thumbs/'.$product['main_img'] ?>" class="main-img" style=""><?php
+                    }else {
+                        ?> <img src="<?= $_layoutParams['public_img'] ?>products/thumbs/dummy.jpg" class="main-img" style=""><?php
+                    }
+                ?>
+            </div>
+            <div class="images-combinations">
+                <?php foreach($product['colors'] as $color) { ?>
+                    <div id="combination-<?=$color['id']?>" idcombination="<?=$color['id']; ?>" class=" text-center img-combination" style="display:none;">
+                        <!-- Set up your HTML -->
+                        <div class="owl-carousel owl-theme">
+                            <?php
+                            if(sizeof( $color['images'] ) > 0 ) {
+                                foreach( $color['images']  as $image) echo '<div><img src="'.$_layoutParams['public_img'].'combinations'.DS.$image['src_img'].'"  class="main-img" ></div>';
+                            } else {
+                                echo '<div><img src="'.$_layoutParams['public_img'].'products/thumbs/dummy.jpg"  class="main-img" ></div>';
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+                <?php } ?>
+
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <a href="<?= MENU_URL?>" class="volver-btn pull-right"><i class="fa fa-chevron-left"></i> VOLVER</a>
+            <div class="especi-title">ESPECIFICACIONES</div>
+            <br />
+            <hr style="    border-color: #555;    margin: 5px 0 18px;" />
+            <p style="font-family:Open Sans; margin-bottom:10px; color:#808389">
+                <?= $product['short_desc']?>
+            </p>
+
+            <hr style="margin:10px 0;" />
+            <strong>Selecciona un color</strong>
+            <div class="colors text-left" style="margin-bottom:8px">
+                <?php foreach($product['colors'] as $i=>$color) {
+                    echo '<div class="color color-switcher text-center color-dot" idproduct="'.$product['id'].'" idcombination="'.$color['id'].'" style="background: '.$color['hex'].'";" product="#prod-'.$product['id'].'" combination="#combination-'.$color['id'].'"> <i class="fa fa-circle" style=""></i> </div>';
+                }
+                ?>
+            </div>
+            <div class="row text-center actions-prod" id="actions-prod-<?=$product['id'] ?>"></div>
+
+            <hr style="margin:10px 0;" />
+
+
+            <div class="row specs-titles hidden-xs">
+                <div class="col-sm-2"><span>Peso</span></div>
+                <div class="col-sm-4"><span>Estilo</span></div>
+                <div class="col-sm-3"><span>Material</span></div>
+                <div class="col-sm-3"><span>Tipología</span></div>
+            </div>
+            <div class="row specs-data">
+                <div class="col-sm-2"><strong class="hidden-sm hidden-md hidden-lg">Peso:</strong> <span><?=@$product['weight']?> <small style="font-size:11px">kg.</small></span></div>
+                <div class="col-sm-4"><strong class="hidden-sm hidden-md hidden-lg">Estilo:</strong> <span><?=@$product['style']?></span></div>
+                <div class="col-sm-3"><strong class="hidden-sm hidden-md hidden-lg">Material:</strong> <span><?=@$product['material']?></span></div>
+                <div class="col-sm-3"><strong class="hidden-sm hidden-md hidden-lg">Tipología:</strong> <span><?=@$product['tipology']?></span></div>
+            </div>
+        </div>
+    </div> <!-- end row -->
+</div> <!-- end container -->
+<br />
+<br />
+<br />

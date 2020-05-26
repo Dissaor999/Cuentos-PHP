@@ -1,0 +1,302 @@
+<div class="index-header">
+    <hgroup class="article__headline">
+        <h2 class="headline__secondary" ><span class="first-letter">REGISTRO</h2>
+
+    </hgroup>
+</div>
+<div style="background: #f9f9f9;">
+
+<br />
+<br />
+<br />
+<div class="container">
+    <div style=" box-shadow: 0 0 10px rgba(0,0,0,.2); background:#fff; border-radius:30px;padding:30px;color:#333;margin-top:80px;margin-bottom:80px;">
+
+
+
+
+    <form class="user-data" id="register-form"  action="<?=BASE_URL?>user/make_register" method="POST">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h2><i class="fa fa-key"></i> Datos de Usuario</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-user"></i></span>
+                    <input type="text" class="" value="" name="d[username]" placeholder="Usuario" />
+                </div>
+
+            </div>
+            <div class="col-sm-4">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-key"></i></span>
+                    <input type="password" class="" value="" name="d[password]"  placeholder="Contraseña" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-key"></i></span>
+                    <input type="password" class="" value="" name="d[repassword]"  placeholder="Repite Contraseña" />
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h2><i class="fa fa-user"></i> Datos Personales</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-pencil"></i></span>
+                    <input type="text" class="" value="" name="d[first_name]"  placeholder="Nombre" />
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-pencil"></i></span>
+                    <input type="text" class="" value="" name="d[last_name]"  placeholder="Apellidos" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-at"></i></span>
+                    <input type="text" class="" value="" name="d[email]"  placeholder="Email" />
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-venus-mars"></i></span>
+
+                    <select class="form-control" name="d[gender]">
+                        <option value="male" >Hombre</option>
+                        <option value="female">Mujer</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-mobile-phone"></i></span>
+                    <input type="text" class="" value="" name="d[mobile]"   placeholder="Móvil"/>
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-phone"></i></span>
+                    <input type="text" class="" value="" name="d[phone]"  placeholder="Teléfono" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row"S>
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-home"></i></span>
+                    <input type="text" class="" value="" name="d[address]"  placeholder="Dirección" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-flag"></i></span>
+                    <select name="d[user_lang]"  placeholder="Idioma">
+                        <?php
+                            foreach(Languages::getLangsDB() as $lang) echo '<option value="'.$lang['tagname'].'" '.(($product['user_lang']==$lang['tagname']) ? 'selected':'').' >'.$lang['name'].'</option>';
+                        ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h2><i class="fa fa-truck"></i> Facturación y envío</h2>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-pencil"></i></span>
+                    <input type="text" class="" value="" name="d[address_bill]"  placeholder="Dirección de envío" />
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+
+            <div class="col-sm-12">
+                <div class="igr">
+                    <span class="igra" id="sizing-addon1"><i class="fa fa-pencil"></i></span>
+                    <input type="checkbox" style="display:inline-block"  name="d[newsletter]"   /> <label style="display:inline-block" >Quiero suscribirme al boletín de noticias para estar informado de todas las novedades.</label>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+
+            <div class="col-sm-12 text-right">
+                <input type="submit" class="submit pull-right" value="REGISTRARSE" style="   padding: 10px 40px;
+    color: white !important;
+    letter-spacing: 3px;
+    font-weight: 600 !important;
+    font-family: Montserrat;">
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+
+</div>
+
+
+<script>
+    jQuery(document).ready(function ($) {
+
+        //Formulario contactForm
+        var cntactFrm = '#register-form';
+
+
+        //Validacion previa de datos del formulario de pre-registro
+        $(cntactFrm).validate({
+
+            rules:{
+                'd[login]':{
+                    required: true,
+                    rangelength: [2,250]
+                },
+
+                'd[password]':{
+                    required: true,
+                    rangelength: [2,250]
+                },
+
+                'd[repassword]':{
+                    required: true,
+                    rangelength: [2,250]
+                },
+
+
+
+                 'd[first_name]':{
+                    required: true,
+                    rangelength: [2,250]
+                },
+                'd[last_name]':{
+                    required: true,
+                    rangelength: [2,250]
+                },
+                'd[email]':{
+                    required: true,
+                    email: true
+                },
+                 'd[gender]':{
+                    required: true,
+                },
+                'd[phone]':{
+                    required: true,
+                    rangelength: [6,15]
+                },
+                 'd[mobile]':{
+                    required: true,
+                    rangelength: [6,15]
+                },
+                'd[address]':{
+                    required: true,
+                    rangelength: [10,1500]
+                },
+
+                'd[address_bill]':{
+                    required: true,
+                    rangelength: [10,1500]
+                }
+            },
+
+        });
+
+        $(cntactFrm).submit(function(e){
+            var formId = $(this).attr('id');
+            e.preventDefault();
+            $(cntactFrm+"_result").fadeOut("fast").html("");
+
+            //Loading
+            $(cntactFrm).find('button.submit i').remove();
+            $(cntactFrm).find('.submit').prepend('<i class="fa fa-spinner fa-spin mr10"></i>');
+
+
+            if ($(cntactFrm).valid()) {
+                $(cntactFrm+"_result").remove();
+                $(cntactFrm).parent().append('<div id="'+formId+'_result"></div>');
+                $.ajax({
+                    type: $(cntactFrm).attr("method"),
+                    url: $(cntactFrm).attr("action"),
+                    data: $(cntactFrm).serialize(),
+                    async:true,
+                    cache: false,
+                    dataType: "json",
+                    global: true,
+                    ifModified: false,
+                    processData:true,
+                    success: function(datos) {
+                        $(cntactFrm).find('button.submit i').remove();
+                        var error = datos["error"];
+                        var message = datos["message"];
+                        var errors = datos["errors"];
+                        if(error==0) {
+                            //Reset inputs
+                            $(cntactFrm).each (function(){this.reset();}).slideUp();
+                            //Show Response
+                            $(cntactFrm+"_result").html('<p class="alert alert-success"><i class="fa  fa-check-circle"></i> '+message+"</p>").fadeIn("slow");
+                        }
+                        else {
+                            console.log(errors);
+                            var errors_html = '';
+                            $(errors).each(function (i, x) {
+                                console.log(x);
+                                errors_html += x;
+
+                            });
+                            $(cntactFrm + "_result").html('<div class="alert alert-danger"><i class="fa fa-times-circle"></i> Hay campos erroneos<p>Errores: ' + errors_html + '</p></div>').fadeIn("fast");
+
+                        }
+                    }
+                });
+
+            }
+            else {
+                $(cntactFrm).find('button.submit i').remove();
+                $(cntactFrm+"_result").html('<p class="alert  alert-danger"> Hay campos erroneos</p>').fadeIn("fast").delay("1000").fadeOut("fast");
+            }
+            return false;
+        });
+
+
+    })
+</script>

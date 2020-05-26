@@ -1,0 +1,100 @@
+<?php
+	$news = $this->_data['news']['data'];
+	$lastNew = $this->_data['lastNew']['data'];
+	$categorias = $this->_data['categoriasBlog']['data'];
+?>
+<div id="head-comunicacion" class="page-breadcrumbs">
+	<div class="container">
+		<h1>NOTICIAS</h1>
+	</div>
+</div>
+<div class="page-main">
+	<div class="container">
+		 <div class="row">
+          <div class="col-sm-8 col-md-8 col-lg-8">
+            <div class="blog_large">
+				<?php
+					foreach($lastNew as $new){
+						$categorias_html = '';
+						if(isset($new['categoriasBlog'])) {
+							$categorias_html = '<strong>Categorías: </strong>';
+							foreach($new['categoriasBlog'] as $categoria) $categorias_html .= '<a class="btag" href="'.BASE_URL.$this->_lang.DS.'noticias'.DS.'categoria'.DS.$categoria['slug'].'">'.$categoria['nombre'].'</a>';
+						}
+						?>
+						
+						 <!-- Post Static Image Start-->
+              <article class="post noticia_lista"  date="<?=$new['fecha'] ?>">
+                <div class="post_date"> <span class="day"><?= date('d', $new['fecha']) ?><a href="#" class="month"><?= date('M', $new['fecha']) ?></a></span>  </div>
+                <div class="post_content medium">
+                  <figure class="post_img"> <img src="<?= $_layoutParams['public_img'].'noticias'.DS.'thumbs'.DS.$new['img_thumb'] ?>" width="700" height="370" alt=" "> </figure>
+                  <div class="post_meta">
+                    <h2> <a href="<?= BASE_URL.$this->_lang.DS.'noticias'.DS.'ver'.DS.$new['slug']?>">perferendis doloribus asperiores ut labore</a> </h2>
+                    <div class="metaInfo">
+						<?= @$categorias_html ?>
+					</div>
+                    <p><?= $new['descripcion_corta'] ?></p>
+                    <a href="<?= BASE_URL.$this->_lang.DS.'noticias'.DS.'ver'.DS.$new['slug']?>" class="btn btn-small btn-default readmore">LEER MÁS</a> </div>
+                </div>
+              </article>
+              <!-- Post Static Image End--> 
+			  
+			  <?php
+					}
+				?>
+				
+				
+             
+              
+            </div>
+          </div>
+          
+          <!--Sidebar Widget-->
+          <aside class="col-sm-4 col-md-4 col-lg-4 sidebar">
+            <div class="sidebar_widget">
+              <div class="sw_search">
+                <div class="sw_title">
+                  <h4>Search</h4>
+                </div>
+                <div class="site-search-area">
+                  <form method="get" id="site-searchform" action="#">
+                    <div>
+                      <input class="input-text" name="s" id="s" placeholder="Type Keywords.." type="text" />
+                      <input id="searchsubmit" value="Search" type="submit" />
+                    </div>
+                  </form>
+                </div>
+                <!-- end site search --> 
+              </div>
+              <div class="sw_categories">
+                <div class="sw_title">
+                  <h4>Categorias</h4>
+                </div>
+                <ul class="arrows_list">
+					<?php
+						foreach($categorias as $categoria) {
+							echo '<li><a href="'.BASE_URL.$this->_lang.DS.'noticias'.DS.'categoria'.DS.$categoria['slug'].'">'.$categoria['nombre'].'</a></li>';
+						}
+					?>
+				
+                </ul>
+              </div>
+              <div class="sw_archives">
+                <div class="sw_title">
+                  <h4>Recent Posts</h4>
+                </div>
+                <ul class="archives_list">
+					<?php
+						foreach($lastNew as $new){
+							echo '<li><a href="'.BASE_URL.$this->_lang.DS.'noticias'.DS.'ver'.DS.$new['slug'].'">'.$new['titulo'].'</a></li>';
+						}
+					?>
+				  </ul>
+              </div>
+              
+            </div>
+          </aside>
+        </div>
+        <!--/.row-->
+       
+	</div>
+</div>

@@ -1,0 +1,117 @@
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Dashboard</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="#">Dashboard</a></li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+
+        <div class="row-fluid">
+					<div class="col-lg-12">
+						<div class="white-box">
+							<div class="box-title">
+								<h3>Borrar Noticia</h3>
+								<div class="actions">
+									
+								</div>
+							</div>
+							<div class="box-content">
+								
+								
+								<?php 
+								
+
+								$programa = $this->_data['product']['data'][0];
+								$langs = $this->_data['langs'];
+                               // echo '<pre>';print_r($programa);echo '</pre>';
+								$errors = @$this->_errors; 
+								
+								if(sizeof(@$errors)>0) {
+									echo '<div class="alert alert-danger"><ul>';
+									foreach($errors as $error) {
+										echo '<li>'.$error.'</li>';
+									}
+									echo '</ul></div>';
+								}
+								
+								?>
+								
+								<p class="alert alert-danger">
+									Estas a punto de borrar la siguiente programación <?= $programa['id'] ?>. ¿Estás seguro de borrarla?
+								</p>
+                                <div class="row">
+								<?php foreach($langs as $k => $v) { ?>
+										<div class="col-sm-6 ">
+										<div class="box box-color box-bordered  lightgrey ">
+										<div class="box-title">
+											<h3>
+												<i class="fa fa-bars"></i>
+												Datos <?php echo $v['name'].' - '.$v['tagname']; ?>
+											</h3>
+										</div>
+									
+										<div class="box-content">
+										
+											<?php 	
+											$errors = @$this->_errors; 
+											
+											if(sizeof(@$errors)>0) {
+												echo '<div class="alert alert-danger"><ul>';
+												foreach($errors as $error) {
+													echo '<li>'.$error.'</li>';
+												}
+												echo '</ul></div>';
+											}											?>
+											<div class="tab-content">
+												<?php	
+													$langid =  strtoupper($v['tagname']);
+													$langidl =  strtolower($v['tagname']);
+													echo '<div class="control-group mt10">
+															<label for="title" class="control-label">Nombre Producto</label>
+															<div class="controls">
+																<span>'.@$programa['langs'][$langidl]['name'].'</span>
+															</div>
+														</div>
+														<div class="control-group mt10">
+															<label for="shortdesc" class="control-label">Descripción</label>
+															<div class="controls">
+																<div>'.html_entity_decode(@$programa['langs'][$langidl]['long_desc']).'</div>
+															</div>
+														</div>';
+													?>
+				
+												</div>		
+											</div>		
+										</div>		
+										</div>
+								<?php } ?>
+                                </div>
+	
+
+							
+								<form id="frmDeleteProduction" class="form-horizontal" action="<?= BASE_URL ?>admin_product/action_delete" method="POST" enctype="multipart/form-data">
+									<input type="hidden" name="id" value="<?= $programa['id'] ?>"/>
+								
+									<div class="form-actions">
+										<button type="submit" class="btn btn-primary">Borrar</button>
+										<a href="<?= BASE_URL ?>admin_product" class="btn">Cancelar</a>
+									</div>
+								</form>
+								
+							</div>
+						</div>
+						
+					</div>
+				</div>
+
+					</div>
+				</div>
+

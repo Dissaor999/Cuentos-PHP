@@ -1,0 +1,115 @@
+<?php 
+	$news = $this->_data['products'];
+
+        if($news['error']>0) {
+            echo ' <div class="row-fluid">
+                <div class="col-lg-12">
+                    <div class="box box-color alert alert-danger">
+                        <h3>Error!</h3>';
+                        echo (isset($news['msg']) && $news['msg']=!'') ? 'Error: '.$news['msg'] : 'Unknown error.';
+            echo '	</div>
+                </div>
+            </div>';
+
+        }
+        if(!isset($news['data']) || sizeof($news['data'])==0) {
+            echo ' <div class="row-fluid">
+                <div class="col-lg-12">
+                    <div class="box box-color alert alert-warning">
+                        <h3>No hay noticias.</h3>';
+            echo '	</div>
+                </div>
+            </div>';
+
+        }
+
+    ?>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Dashboard</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="#">Dashboard</a></li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <a href="<?=BASE_URL.$this->_controlador?>/add" class="btn btn-primary">AÑADIR NUEVA</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+								
+										<table class=" text-center table table-hover table-nomargin dataTable table-bordered">
+										<thead>
+											<tr>
+												<th width="50" class="text-center">ID</th>
+												
+												<th width="70"  class="text-center">Fecha</th>
+												<th  width="170"  class="text-center">Nombre</th>
+									
+												<th width="70"  class="text-center">Visible</th>
+												<th width="70"  class="text-center">Combinaciones</th>
+
+												<th width="60"  class="text-center"> Miniatura</th>
+											
+												<th width="60"  class="text-center">Acciones</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+											//echo '<pre>';print_r($this->_data['data']['projects']);echo '</pre>';
+											if(isset($news['data']) &&  sizeof($news['data'])>0)
+											foreach($news['data'] as $k => $row) {
+
+
+											    ?>
+												<tr>
+													<td class="text-center"><?= $row['id'] ?></td>
+													<td><?= date('d/m/Y H:i:s', (!empty($row['fecha'])) ? $row['fecha'] : time());?></td>
+													
+													<td><?= $row['name'] ?></td>
+                                                    <td class="text-center"><?= (($row['visible']==1)? '<i class="fa fa-eye" style="color:green"></i>' : '<i class="fa fa-eye-slash" style="color:red"></i>' ) ?></td>
+
+                                                    <td>
+                                                            <?php
+                                                        foreach($row['combinations'] as $combination) {
+                                                            ?>
+                                                            <div class="combination" style="display:table; margin: 0 auto; border-bottom: 1px solid #c5c5c5;"><a href="<?=MENU_URL?>/admin_product/edit_combination/<?=$combination['id']?>"><?=$combination['sku']?> <span style="height:10px;width:10px;    border-radius: 10px; display:inline-block; border: 1px solid <?=$combination['border']?>; background:<?=$combination['hex']?>;"></span>  <small><?=$combination['alto']?>x<?=$combination['ancho']?> - <?=$combination['price']?>€</small></a></div>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </td>
+
+												
+													<td style="text-align:center"><img style="display: block; height: 40px;" src="<?= $_layoutParams['public_img'] ?>products/thumbs/<?=$row['main_img'] ?>"/></td>
+												
+													<td  class="text-center">
+														<a href="<?= MENU_URL.$this->_controlador ?>/edit/<?= $row['id'] ?>" title="Modificar" class="btn btn-xs btn-warning">&nbsp;<i class="icon fa fa-pencil">&nbsp;</i></a>
+														<a href="<?= MENU_URL.$this->_controlador ?>/delete/<?= $row['id'] ?>" title="Borrar" class="btn btn-xs btn-danger">&nbsp;<i class="icon fa fa-trash-o">&nbsp;</i></a>
+													</td>
+												</tr>
+											<?php
+											}
+											?>
+											
+											
+										</tbody>
+									</table>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+    </div>
+
+

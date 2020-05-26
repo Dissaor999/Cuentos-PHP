@@ -1,0 +1,288 @@
+<div class="book-heading" style="padding:3vw 0; background-image: url(http://cuentos.dev/public/img/bookbg.jpg);background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;">
+    <div class="overlay"></div>
+    <div class=" text-center">
+        <h1 class="title" style="color:white">Encargos a medida</h1>
+    </div>
+</div>
+<style>
+    .mb20 {
+        margin-bottom: 20px;
+    }
+
+    .overlay {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        background: rgba(0, 0, 0, .3);
+    }
+
+    .contact ul li a {
+        padding: 10px;
+        display: block;
+        color: #29abe2;
+    }
+
+    .social-contact {
+        list-style: none
+    }
+
+    .social-contact li {
+        border-bottom: 0px !important;
+        list-style: none;
+        display: inline-block;
+        margin: 2px 5px;
+    }
+
+    .social-contact li a {
+        text-decoration: none !important;
+        border: 1px dashed #29abe2;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        line-height: 1.3em;
+        color: #29abe2;
+        font-size: 16px;
+        border-radius: 100%;
+    }
+
+    .social-contact li a:hover {
+        color: #333;
+    }
+
+    .team-member {
+        font-family: 'Gloria Hallelujah';
+        color: #29abe2;
+        text-align: center;
+        font-size: 43Px;
+    }
+
+    .nombre {
+        font-family: 'Gloria Hallelujah';
+        color: #29abe2;
+        text-align: center;
+        font-size: 43Px;
+    }
+
+    .puesto {
+
+        font-family: "Gloria Hallelujah";
+        font-size: 20px;
+        color: #333;
+    }
+
+    .descripcion {
+        margin-top: 20px;
+    }
+
+
+    .metodo1  {
+        text-align:center;
+    }
+
+    .metodo1 .number {
+        text-align: centeR;
+        font-size: 45px;
+        border: 1px solid #2a90b7;
+        color: #2a90b7;
+        color: #444;
+        height: 100px;
+        width: 100px;
+        display: table;
+        margin: 0 auto;
+        border-radius: 100%;
+        line-height: 100px;
+        transition: .3s ease-in-out;
+    }
+    .metodo1 {
+        margin-bottom:40px;
+        font-size:16px;
+    }
+
+     .metodo1 strong {
+
+        font-size: 24px;
+         margin-bottom: 10px;
+         display: block;
+    }
+
+    .metodo1:hover .number {
+        background:#2a90b7;
+        color:white;
+    }
+    .tipo {
+        text-align:center;
+        font-size:17px;
+        line-height:1.6em;
+        margin-bottom:20px;
+        padding:14px;
+    }
+    .masonry { /* Masonry container */
+         column-count: 4;
+         column-gap: 1em;
+     }
+
+    .item { /* Masonry bricks or child elements */
+        background-color: #eee;
+        display: inline-block;
+        margin: 0 0 1em;
+        width: 100%;
+    }
+
+    @media only screen and (min-width: 400px) {
+        .masonry {
+            -moz-column-count: 2;
+            -webkit-column-count: 2;
+            column-count: 2;
+        }
+    }
+
+    @media only screen and (min-width: 700px) {
+        .masonry {
+            -moz-column-count: 3;
+            -webkit-column-count: 3;
+            column-count: 3;
+        }
+    }
+
+    @media only screen and (min-width: 900px) {
+        .masonry {
+            -moz-column-count: 4;
+            -webkit-column-count: 4;
+            column-count: 4;
+        }
+    }
+
+
+</style>
+<section class="section section-home">
+    <div class="container">
+        <link href="https://fonts.googleapis.com/css?family=Stalemate" rel="stylesheet">
+
+        <div class="row contact">
+            <div class="col-sm-12 text-center">
+                <h2>¿Quieres hacer un <strong>regalo único y original</strong>?</h2>
+                <br />
+                <div >
+
+                    <p style="color:#888; font-size:21px; line-height:1.6em;">Puedes realizar cualquier encargo y pedir presupuesto sin ningún compromiso a través de la dirección de correo: info@micuentomagico.com</p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <br />
+        <br />
+          <div class="row ">
+                <div class="col-sm-3">
+                    <div class="tipo">
+                        <img src="<?=$_layoutParams['public_img']?>encargos/cuento.png"  style="width:150px; margin-bottom:20px;"/>
+                        <br />
+                        <strong>CUENTOS PERSONALIZADOS:</strong>
+                        <br >
+                        Un libro en tapa dura o blanda. Tú escribes la historia del cuento y nosotros de las ilustraciones, maquetado, impresión, etc.
+                    </div>
+                </div>
+                 <div class="col-sm-3">
+                    <div class="tipo">
+                        <img src="<?=$_layoutParams['public_img']?>encargos/retrato.svg" style="width:150px; margin-bottom:20px;"/>
+                        <br />
+                        <strong>RETRATOS Y CARICATURAS:</strong><br >a color, en blanco y negro.
+                    </div>
+                </div>
+
+
+              <div class="col-sm-3">
+                    <div class="tipo">
+                        <img src="<?=$_layoutParams['public_img']?>encargos/cuadro.png" style="width:150px; margin-bottom:20px;" />
+                        <br />
+                         <strong>CUADROS:</strong><br >a color, en blanco y negro.
+                    </div>
+                </div>
+                 <div class="col-sm-3">
+                    <div class="tipo">
+                        <img src="<?=$_layoutParams['public_img']?>encargos/recuerdos.png" style="width:150px; margin-bottom:20px;" />
+                        <br />
+                         <strong>RECUERDOS DE BAUTIZO, COMUNIÓN Y OTRAS CELEBRACIONES:</strong><br >a color, en blanco y negro.
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        <br />
+        <br />
+        <div class="masonry">
+            <div class="item"><img src="<?=$_layoutParams['public_img']?>encargos/galeria/galeria-1.jpg"></div>
+            <div class="item"><img src="<?=$_layoutParams['public_img']?>encargos/galeria/galeria-2.jpg"></div>
+            <div class="item"><img src="<?=$_layoutParams['public_img']?>encargos/galeria/galeria-5.jpg"></div>
+            <div class="item"><img src="<?=$_layoutParams['public_img']?>encargos/galeria/galeria-6.jpg"></div>
+            <div class="item"><img src="<?=$_layoutParams['public_img']?>encargos/galeria/galeria-7.jpg"></div>
+            <div class="item"><img src="<?=$_layoutParams['public_img']?>encargos/galeria/galeria-4.jpg"></div>
+            <div class="item"><img src="<?=$_layoutParams['public_img']?>encargos/galeria/galeria-8.jpg"></div>
+            <div class="item"><img src="<?=$_layoutParams['public_img']?>encargos/galeria/galeria-9.jpg"></div>
+            <div class="item"><img src="<?=$_layoutParams['public_img']?>encargos/galeria/galeria-3.jpg"></div>
+        </div>
+
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="metodo1">
+                    <div class="number">1</div>
+                    <br />
+                    <strong>Ponte en contacto con nosotros.</strong>
+                    <br />
+                    Primero mándanos un correo con el tema “encargo” a info@micuentomagico.com y explica qué es lo que quieres
+                </div>
+            </div>
+            <div class=" col-sm-4">
+                <div class="metodo1">
+                    <div class="number">2</div>
+                    <br />
+                    <strong>Especifica tu encargo.</strong>
+                    <br />
+                    Explícanos los detalles del encargo (si es cuento el número de páginas, dibujos, tamaño, etc; si es retrato o caricatura si lo quieres complejo, sencillo; si es un cuadro la técnica que quiere que se utilice). Puedes enviarnos ejemplos para que sea más rápido el darte un presupuesto, o fotos en caso de retratos, caricaturas, etc.
+                </div>
+            </div>
+            <div class=" col-sm-4">
+                <div class="metodo1">
+                    <div class="number">3</div>
+                    <br />
+                    <strong>Forma de pago.</strong>
+                    <br />
+                    Se hace un primer pago del 50% al inicio, y un pago final antes de enviar el trabajo.
+                </div>
+            </div>
+            </div>
+         <div class="row">
+            <div class=" col-sm-4 col-sm-offset-2">
+                <div class="metodo1">
+                    <div class="number">4</div>
+                    <br />
+                    <strong>Tiempo de entrega.</strong>
+                    <br />
+                    El tiempo de entrega depende del tipo de encargo, la dificultad, la cantidad, lugar de entrega.
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="metodo1">
+                    <div class="number">5</div>
+                    <br />
+                    <strong>Envíos por mensajería.</strong>
+                    <br />
+                    Se realizan a cualquier país.
+
+                </div>
+            </div>
+        </div>
+        </div>
+
+</section>
