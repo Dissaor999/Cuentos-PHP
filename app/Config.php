@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('Europe/Madrid');
 
-        define('BASE_URL', 'http://cuento.test:8080/');
+        define('BASE_URL', 'http://cuento.test:8080/');//Aqui sucede la magia
         define('ADMIN_URL', BASE_URL.'admin/');
 
          define('DEFAULT_CONTROLLER', 'index', true);
